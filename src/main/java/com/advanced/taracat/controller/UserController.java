@@ -2,7 +2,7 @@ package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.UserRepository;
-import com.advanced.taracat.exeptions.NotFoundExeption;
+import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).orElseThrow(NotFoundExeption::new);
+        return userRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping
@@ -36,7 +36,7 @@ public class UserController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public User updateUser (@PathVariable Long id, @RequestBody User user){
-        User userDB = userRepository.findById(id).orElseThrow(NotFoundExeption::new);
+        User userDB = userRepository.findById(id).orElseThrow(NotFoundException::new);
         userDB.setUserName(user.getUserName());
         userDB.setPassword(user.getPassword());
         userDB.setEmail(user.getEmail());
@@ -47,7 +47,7 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public User delete(@PathVariable Long id){
-        User deletedUser = userRepository.findById(id).orElse(null);
+        User deletedUser = userRepository.findById(id).orElseThrow(NotFoundException::new);
         if (deletedUser != null){
             userRepository.delete(deletedUser);
         }
