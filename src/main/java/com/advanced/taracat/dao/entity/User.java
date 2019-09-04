@@ -18,7 +18,9 @@ public class User {
     @Size(max = 255)
     private String userName;
     private String password;
-    private String email;
-    @Column(name = "date_birth")
-    private Date dateOfBirth;
+    private int fights;
+    private int winn;
+    private int lose;
+    @OneToMany
+    private Cat cat;
 }
