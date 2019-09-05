@@ -15,6 +15,13 @@ public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int fight;
-    private int block;
+    private int user_id;
+    private String name;
+    private int cat_head;
+    private int cat_cheast;
+    private int cat_belt;
+    private int cat_legs;
+    private int cat_straight;
+    private int cat_hp;
+    private int cat_level;
 }
