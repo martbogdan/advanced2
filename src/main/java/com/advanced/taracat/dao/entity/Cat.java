@@ -3,10 +3,7 @@ package com.advanced.taracat.dao.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -15,7 +12,6 @@ public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int user_id;
     private String name;
     private int cat_head;
     private int cat_cheast;
@@ -24,4 +20,7 @@ public class Cat {
     private int cat_straight;
     private int cat_hp;
     private int cat_level;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
