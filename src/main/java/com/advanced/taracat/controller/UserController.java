@@ -1,8 +1,8 @@
 package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.User;
-import com.advanced.taracat.dao.repository.UserRepository;
-import com.advanced.taracat.exeptions.NotFoundException;
+import com.advanced.taracat.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,45 +11,44 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserService userService;
 
     @GetMapping("all")
     public List<User> getAllUsers(){
-        return userRepository.findAll();
+        return userService.getAll();
     }
 
     @GetMapping("{id}")
     public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).orElseThrow(NotFoundException::new);
+        return userService.getUserById(id);
+    }
+    @GetMapping("user/{name}")
+    public User getUserByName(@PathVariable String name){
+        return userService.getUserByUsername(name);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User saveNewUser (@RequestBody User user){
-        return userRepository.save(user);
+        return userService.create(user);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public User updateUser (@PathVariable Long id, @RequestBody User user){
-        User userDB = userRepository.findById(id).orElseThrow(NotFoundException::new);
+        User userDB = userService.getUserById(id);
         userDB.setUserName(user.getUserName());
         userDB.setPassword(user.getPassword());
-        userDB.setEmail(user.getEmail());
-        userDB.setDateOfBirth(user.getDateOfBirth());
-        userRepository.save(userDB);
+        userService.create(userDB);
         return userDB;
     }
 
     @DeleteMapping("{id}")
     public User delete(@PathVariable Long id){
-        User deletedUser = userRepository.findById(id).orElseThrow(NotFoundException::new);
+        User deletedUser = userService.getUserById(id);
         if (deletedUser != null){
-            userRepository.delete(deletedUser);
+            userService.delete(id);
         }
         return deletedUser;
     }

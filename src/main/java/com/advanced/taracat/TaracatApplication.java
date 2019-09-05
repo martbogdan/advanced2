@@ -20,13 +20,11 @@ public class TaracatApplication {
 			User u = new User();
 			u.setUserName("bob");
 			u.setPassword("123");
-			u.setEmail("m@mail");
 			userRepository.save(u);
 
 			u = new User();
 			u.setUserName("vvv");
 			u.setPassword("123");
-			u.setEmail("v@mail");
 			userRepository.save(u);
 		};
 	}

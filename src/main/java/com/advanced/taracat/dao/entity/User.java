@@ -1,10 +1,10 @@
 package com.advanced.taracat.dao.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Data
@@ -14,13 +14,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_name", length = 255)
+    @Column(name = "username", length = 255)
     @Size(max = 255)
     private String userName;
     private String password;
+    private boolean active;
     private int fights;
-    private int winn;
-    private int lose;
-    @OneToMany
-    private Cat cat;
+    private int win;
+    private int loss;
+
 }
