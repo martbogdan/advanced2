@@ -18,6 +18,9 @@ public class UserService  {
     public User getUserByUsername(String userName) throws UsernameNotFoundException {
         return userRepository.findByUserName(userName);
     }
+    public User getUserByNameAndPassword(String username, String password){
+        return userRepository.findByUserNameAndPassword(username, password);
+    }
 
     public User getUserById (Long id){
         return userRepository.findById(id).orElseThrow(NotFoundException::new);
