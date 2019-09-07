@@ -18,13 +18,15 @@ public class TaracatApplication {
 	public CommandLineRunner demo(UserRepository userRepository){
 		return (args)->{
 			User u = new User();
-			u.setUserName("bob");
+			u.setUsername("bob");
 			u.setPassword("123");
+			u.setActive(true);
 			userRepository.save(u);
 
 			u = new User();
-			u.setUserName("vvv");
+			u.setUsername("vvv");
 			u.setPassword("123");
+			u.setActive(true);
 			userRepository.save(u);
 		};
 	}

@@ -38,7 +38,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User updateUser (@PathVariable Long id, @RequestBody User user){
         User userDB = userService.getUserById(id);
-        userDB.setUserName(user.getUserName());
+        userDB.setUsername(user.getUsername());
         userDB.setPassword(user.getPassword());
         userService.create(userDB);
         return userDB;
