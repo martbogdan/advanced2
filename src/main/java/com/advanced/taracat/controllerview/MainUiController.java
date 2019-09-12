@@ -25,5 +25,10 @@ public class MainUiController {
         return "hello";
     }
 
+    @GetMapping("/game")
+    public  String chooseGame() {
+        return "choose_game";
+    }
+
 
 }

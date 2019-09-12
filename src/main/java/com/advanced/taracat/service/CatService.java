@@ -18,6 +18,9 @@ public class CatService {
     public List<Cat> getAllByUserId (Long id){
         return catRepository.findAllByUserId(id);
     }
+    public List<Cat> getAllByUsername (String username) {
+        return catRepository.findAllByUser_Username(username);
+    }
     public Cat getCatById(Long id){
         return catRepository.findById(id).orElseThrow(NotFoundException::new);
     }
