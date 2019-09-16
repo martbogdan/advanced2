@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TarakanRepository extends JpaRepository<Tarakan,Long> {
     List<Tarakan> findAllByUser_Username (String username);
+    Tarakan findByTarname (String tarname);
 }

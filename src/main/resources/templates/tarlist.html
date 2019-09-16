@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>TaraCat</title>
+</head>
+<body style="padding:10px;">
+<a th:href="@{/tar}" title="" style="float:right;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Play Run Tarakan</a>
+
+<form th:action="@{/tarlist}" method="post">
+
+    <div class="form-group">
+        <label for="tarname">TarakanName</label>:
+        <input type="text"
+               id="tarname"
+               name="tarname"
+               class="form-control"
+               autofocus="autofocus"
+               placeholder="TarakanName">
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <input type="submit"
+                       name="register-submit"
+                       id="register-submit"
+                       class="form-control btn btn-info"
+                       value="Create new Tarakan">
+            </div>
+        </div>
+    </div>
+</form>
+<table border="2" cellpadding="5">
+    <thead>
+    <th>Name</th>
+    <th>Level</th>
+    <th>Experience</th>
+    <th>Max Step</th>
+    </thead>
+    <tbody>
+    <tr th:each="tarakan : ${tarakans}">
+        <td th:text="${tarakan.tarname}"></td>
+        <td th:text="${tarakan.level}"></td>
+        <td th:text="${tarakan.experience}"></td>
+        <td th:text="${tarakan.step}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

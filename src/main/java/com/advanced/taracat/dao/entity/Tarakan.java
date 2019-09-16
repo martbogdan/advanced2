@@ -11,7 +11,7 @@ public class Tarakan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String tarname;
     private Integer level;
     private Integer experience;
     private Integer step;

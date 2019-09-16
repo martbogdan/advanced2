@@ -23,6 +23,9 @@ public class TarakanService {
     public Tarakan getTarakanById (Long id){
        return tarakanRepository.findById(id).orElseThrow(NotFoundException::new);
     }
+    public Tarakan getTarakanByName (String name){
+       return tarakanRepository.findByTarname(name);
+    }
 
     public Tarakan create (Tarakan tarakan){
        return tarakanRepository.save(tarakan);

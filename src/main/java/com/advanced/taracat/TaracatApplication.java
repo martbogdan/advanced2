@@ -1,8 +1,10 @@
 package com.advanced.taracat;
 
 import com.advanced.taracat.dao.entity.Cat;
+import com.advanced.taracat.dao.entity.Tarakan;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
+import com.advanced.taracat.dao.repository.TarakanRepository;
 import com.advanced.taracat.dao.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +19,7 @@ public class TaracatApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserRepository userRepository, CatRepository catRepository){
+	public CommandLineRunner demo(UserRepository userRepository, CatRepository catRepository, TarakanRepository tarakanRepository){
 		return (args)->{
 			User u = new User();
 			u.setUsername("bob");
@@ -48,7 +50,12 @@ public class TaracatApplication {
 			c.setUser(userRepository.findByUsername("bob"));
 			c.setCat_level(3);
 			catRepository.save(c);
-			
+
+			Tarakan t = new Tarakan();
+			t.setTarname("Bomb");
+			t.setUser(userRepository.findByUsername("vvv"));
+			t.setLevel(1);
+			tarakanRepository.save(t);
 		};
 	}
 }

@@ -30,5 +30,10 @@ public class MainUiController {
         return "choose_game";
     }
 
+    @GetMapping("/userpage")
+    public String userPage (){
+        return "userpage";
+    }
+
 
 }
