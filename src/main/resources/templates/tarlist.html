@@ -39,6 +39,7 @@
     <th>Level</th>
     <th>Experience</th>
     <th>Max Step</th>
+    <th>Delete</th>
     </thead>
     <tbody>
     <tr th:each="tarakan : ${tarakans}">
@@ -46,6 +47,7 @@
         <td th:text="${tarakan.level}"></td>
         <td th:text="${tarakan.experience}"></td>
         <td th:text="${tarakan.step}"></td>
+        <td><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </td>
     </tr>
     </tbody>
 </table>

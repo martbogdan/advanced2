@@ -3,6 +3,7 @@ package com.advanced.taracat.controllerview;
 import com.advanced.taracat.dao.entity.Tarakan;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.TarakanRepository;
+import com.advanced.taracat.exeptions.NotFoundException;
 import com.advanced.taracat.service.TarakanService;
 import com.advanced.taracat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TarakanController {
@@ -45,5 +44,13 @@ public class TarakanController {
         model.addAttribute("tarakans", tarakanRepository.findAllByUser_Username(authentication.getName()));
         model.addAttribute("status", "all");
         return "tarlist";
+    }
+    @GetMapping("/delete_tarakan")
+    public String deleteTarakan (@RequestParam Long tarId){
+        Tarakan deletedTarakan = tarakanRepository.findById(tarId).orElseThrow(NotFoundException::new);
+        if (deletedTarakan != null){
+            tarakanRepository.delete(deletedTarakan);
+        }
+         return "tarlist";
     }
 }
