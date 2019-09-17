@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <title>TaraCat</title>
@@ -31,6 +31,8 @@
         </div>
     </div>
 </form>
+<h1>Tarakanu</h1>
+<form th:method="get" th:action="@{/list}">
 <table border="2" cellpadding="5">
     <thead>
     <th>Name</th>
@@ -47,5 +49,8 @@
     </tr>
     </tbody>
 </table>
+<input th:if="${status} != 'all'" type="button" onclick="location.href='/list';" value="All Tarakans"/>
+</form>
+
 </body>
 </html>
