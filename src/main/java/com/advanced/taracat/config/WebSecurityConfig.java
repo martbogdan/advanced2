@@ -39,7 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/game", true)
                 .and()
                     .logout()
-                    .permitAll();
+                    .permitAll()
+        .and()
+        .csrf().disable();
     }
 
     @Override
