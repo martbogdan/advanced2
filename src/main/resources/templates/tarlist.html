@@ -31,28 +31,14 @@
         </div>
     </div>
 </form>
-<h1>Tarakanu</h1>
-<form th:method="get" th:action="@{/list}">
-<table border="2" cellpadding="5">
-    <thead>
-    <th>Name</th>
-    <th>Level</th>
-    <th>Experience</th>
-    <th>Max Step</th>
-    <th>Delete</th>
-    </thead>
-    <tbody>
-    <tr th:each="tarakan : ${tarakans}">
-        <td th:text="${tarakan.tarname}"></td>
-        <td th:text="${tarakan.level}"></td>
-        <td th:text="${tarakan.experience}"></td>
-        <td th:text="${tarakan.step}"></td>
-        <td><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </td>
-    </tr>
-    </tbody>
-</table>
-<input th:if="${status} != 'all'" type="button" onclick="location.href='/list';" value="All Tarakans"/>
-</form>
+<h5>Список тараканів</h5>
+    <div th:each="tarakan : ${tarakans}">
+        <div th:text="${tarakan.tarname}"></div>
+        <div th:text="${tarakan.level}"></div>
+        <div th:text="${tarakan.experience}"></div>
+        <div th:text="${tarakan.step}"></div>
+        <div><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </div>
+    </div>
 
 </body>
 </html>
