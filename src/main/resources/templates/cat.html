@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
 <title>TaraCat</title>
@@ -8,50 +8,37 @@
 
 <div style="padding:10px;float:left;">
 
-<form method="post" action="">
-
-	<div style="width:300px;padding:10px; border:1px solid #000;float:left;">
-		<div style="width:150px;float:left;">CatKolia [5] (100/100)</div>
-		<div style="width:125px;float:right;">
-			<div style="float:left;margin-left:3px;">Attack</div>
-			<div style="float:right;margin-right:10px;">Deff</div>
-			<div style="clear:both;"></div>
-		</div>
+	<div style="margin-bottom:10px;">UserName</div>
+	
+	<div style="width:700px;float:left;">
+		<form method="get" action="/addcat">
+			<div style="width:250px;padding:10px;float:left;border:1px solid #000;">Create new Cat: <input type="text" name="catname" placeholder="Enter CatName" style="margin-right:10px;" />
+				<input type="submit" value="Create" /></div>
+		</form>
 		<div style="clear:both;"></div>
-		<div style="width:150px;height:245px;margin-top:25px;background-color:#ccc;float:left;">Cat Image (Avatar)</div>
-		<div style="width:125px;float:right;margin-top:25px">
-			<div style="float:left;">
-				<div style="width:50px;height:50px;background-color:#ccc">Head<input type="radio" name="x" /></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Nack<input type="radio" name="x"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Body<input type="radio" name="x"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Legs<input type="radio" name="x"></div>
+		<form method="post" action="">
+			<div style="width:250px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+				List of Cats:
+				<div style="height:15px;"></div>
+				<div style="float:left;" th:text="${cat.catname}">[<span th:text="${cat.level}"></span>] (<span th:text="${tarakan.experience}"></span>) ( Choose: <input type="radio" name="x" /> )</div><div style="float:right;"><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">X</a></div>
+				<div style="height:10px;clear:both;"></div>
 			</div>
-			<div style="float:right;">
-				<div style="width:50px;height:50px;background-color:#ccc">Head<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Nack<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Body<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Legs<input type="radio" name="y"></div>
+			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="Fight!"></div>
+			<div style="width:250px;margin-top:25px;padding:10px;float:right;border:1px solid #000;">
+				List of BotCats:
+				<div style="height:15px;"></div>
+				<div style="float:left;">BotCat1[1] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat2[2] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat3[3] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat4[4] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat5[5] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="height:10px;clear:both;"></div>
 			</div>
-			<div style="clear:both;"></div>
-		</div>
-		<div style="clear:both;"></div>
-	</div>
-	<div style="margin:150px 25px 0px 25px;float:left;">VS</div>
-	<div style="padding:10px; border:1px solid #000;float:left;">
-		<div style="width:150px;float:left;">CatSerhio [3] (25/100)</div>
-		<div style="clear:both;"></div>
-		<div style="width:150px;height:245px;margin-top:25px;background-color:#ccc;float:left;">Cat Image (Avatar)</div>
-		<div style="clear:both;"></div>
-	</div>
-	<div style="clear:both;height:25px;"></div>
-	<div style="text-align:center;margin-bottom:25px;"><input type="submit" value="Kick!" /></div>
-	<div style="padding:10px;width:545px;border:1px solid #000;">
-		<div style="padding:5px 0px">Round 2</div>
-		<div>Кіт CatKolia вдарив соперника в голову на -5 hp, заблокував шию </div>
-		<div>Кіт CatSerhio вдарив соперника в шию і попав в блок, пропустив удар в голову на -5 hp </div>
-		<div style="padding:5px 0px">Round 1</div>
-		<div>Кіт CatKolia вдарив соперника в голову на -3 hp, заблокував шию </div>
-		<div>Кіт CatSerhio вдарив соперника в шию і попав в блок, пропустив удар в голову на -3 hp </div>
+		</form>
 	</div>
 
 </form>

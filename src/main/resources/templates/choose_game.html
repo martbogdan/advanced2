@@ -9,6 +9,10 @@
 	<input type="submit" value="Sign Out"/>
 </form>
 <p th:text="'Hello, '+ ${#httpServletRequest.remoteUser} + '!'" />
+
+kjhkjgkjhgk
+<div sec:authrntication="principal.authrities"></div>
+<div th:text="${#authentication}"></div>
 <div style="width:650px;">
 	<a th:href="@{/cat}" title="" style="float:left;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Cat Fight</a>
 	<a th:href="@{/tarlist}" title="" style="float:right;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Run Tarakan</a>
