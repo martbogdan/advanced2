@@ -20,6 +20,10 @@
 			<div style="width:250px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
 				List of Cats:
 				<div style="height:15px;"></div>
+				<div th:each="cat : ${cats}">
+					<div th:text="${cat.name}"></div>
+					<div th:text="${cat.cat_level}"></div>
+				</div>
 			</div>
 			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="Fight!"></div>
 			<div style="width:250px;margin-top:25px;padding:10px;float:right;border:1px solid #000;">

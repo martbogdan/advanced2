@@ -22,8 +22,8 @@ public class GameController {
     @GetMapping("/cat")
     public String catList(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication);
         model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
-        model.addAttribute("status", "all");*/
         return "cat";
     }
 
