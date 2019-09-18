@@ -28,7 +28,9 @@ public class TarakanController {
         model.addAttribute("tarakans", tarakanRepository.findAllByUser_Username(authentication.getName()));
         return "tarlist";
     }
-    /*public String addTarakan (@RequestParam String tarname){
+
+    /*@PostMapping("/addtar")
+    public String addTarakan (@RequestParam String tarname){
         Tarakan tarakan = new Tarakan();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -40,14 +42,8 @@ public class TarakanController {
         tarakan.setStep(3);
         tarakanRepository.save(tarakan);
         return "tarlist";
-    }
-    @GetMapping("/list")
-    public String getAllByUser (Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("tarakans", tarakanRepository.findAllByUser_Username(authentication.getName()));
-        model.addAttribute("status", "all");
-        return "tarlist";
     }*/
+
     @GetMapping("/delete_tarakan")
     public String deleteTarakan (@RequestParam Long tarId){
         Tarakan deletedTarakan = tarakanRepository.findById(tarId).orElseThrow(NotFoundException::new);
