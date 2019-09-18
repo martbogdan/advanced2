@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface CatRepository extends JpaRepository<Cat, Long> {
     List<Cat> findAllByUserId (Long id);
+    List<Cat> findAllByUser_Username (String username);
 }

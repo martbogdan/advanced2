@@ -22,6 +22,10 @@ public class CatController {
     public List<Cat> getAllByUserId(@PathVariable Long id){
         return catService.getAllByUserId(id);
     }
+    @GetMapping("all/user/{username}")
+    public List<Cat> getAllByUsername(@PathVariable String username){
+        return catService.getAllByUsername(username);
+    }
     @GetMapping("{id}")
     public Cat getById(@PathVariable Long id){
         return catService.getCatById(id);

@@ -20,9 +20,9 @@ public class User {
     private String username;
     private String password;
     private boolean active;
-    private int fights;
-    private int win;
-    private int loss;
+    private Integer fights;
+    private Integer win;
+    private Integer loss;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
