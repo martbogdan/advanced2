@@ -1,4 +1,4 @@
-package com.advanced.taracat.controllerview;
+package com.advanced.taracat.controller;
 
 import com.advanced.taracat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

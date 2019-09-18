@@ -1,4 +1,4 @@
-package com.advanced.taracat.controllerview;
+package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.Tarakan;
 import com.advanced.taracat.dao.entity.User;
