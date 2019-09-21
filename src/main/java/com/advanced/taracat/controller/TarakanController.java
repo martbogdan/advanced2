@@ -11,12 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class TarakanController {
@@ -74,7 +76,38 @@ public class TarakanController {
          return "forward:/tarlist";
     }
     @GetMapping("/choose_tarakan")
-    public String chooseTarakan(){
+    public String chooseTarakan(@RequestParam Long tarId, Model model){
+        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        if (tarakanUser.getLevel()==1){
+            tarakanBot = tarakanService.getTarakanByName("bot1");
+        }
+        String tarName = tarakanUser.getTarname();
+        System.out.println("User tarakan: "+tarName);
+        System.out.println("BOT tarakan: "+ tarakanBot.getTarname());
+        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakanBotName",tarakanBot.getTarname());
+
         return "tar";
+    }
+
+    @GetMapping ("/run_tarakan")
+    public String runTarakan (@RequestParam Long tarId, Model model){
+        Random random = new Random();
+        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        String tarName = tarakanUser.getTarname();
+        model.addAttribute("tarakan", tarName);
+
+        if (tarakanUser.getLevel()==1){
+            tarakanBot = tarakanService.getTarakanByName("bot1");
+        }
+        int tUser = random.nextInt(tarakanUser.getStep());
+        int tBot = random.nextInt(tarakanBot.getStep());
+        model.addAttribute("marginU",tUser);
+        model.addAttribute("marginB",tBot);
+        System.out.println("User tarakan: "+tarName);
+        System.out.println("BOT tarakan: "+ tarakanBot.getTarname());
+        return "redirect:/tar";
     }
 }

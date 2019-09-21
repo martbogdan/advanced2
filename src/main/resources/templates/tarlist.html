@@ -44,7 +44,7 @@
         <div th:text="${tarakan.experience}"></div>
         <div th:text="${tarakan.step}"></div>
         <div><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </div>
-        <div><a th:href="@{/choose_tarakan}">choose</a> </div>
+        <div><a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a> </div>
     </div>
 </form>
 </body>
