@@ -24,6 +24,7 @@
 				<div th:each="cat : ${cats}">
 					<div th:text="${cat.name}"></div>
 					<div th:text="${cat.cat_level}"></div>
+					<div><a th:href="@{/delete_cat(catId=${cat.id})}">delete</a> </div>
 				</div>
 			</div>
 			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="Fight!"></div>

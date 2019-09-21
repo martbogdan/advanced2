@@ -3,6 +3,7 @@ package com.advanced.taracat.controller;
 import com.advanced.taracat.dao.entity.Cat;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
+import com.advanced.taracat.exeptions.NotFoundException;
 import com.advanced.taracat.service.CatService;
 import com.advanced.taracat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class GameController {
     private CatService catService;
     @Autowired
     private UserService userService;
+
+    //Метод для отримування списку котів юзера
     @GetMapping("/cat")
     public String catList(Model model){
         String catError = "";
@@ -33,7 +36,7 @@ public class GameController {
         model.addAttribute("cat_error", catError);
         return "cat";
     }
-
+//          Метод додавання кота
     @PostMapping("/addcat")
     public String addCat (@RequestParam String catname, Model model){
         Cat cat = new Cat();
@@ -68,5 +71,15 @@ public class GameController {
         return "cat";
     }
 
+
+    // Метод видалення кота.
+    @GetMapping("/delete_cat")
+    public String deleteCat (@RequestParam Long catId) {
+        Cat deleteCat = catRepository.findById(catId).orElseThrow(NotFoundException::new);
+        if (deleteCat != null) {
+            catRepository.delete(deleteCat);
+        }
+        return "forward:/cat";
+    }
 
 }
