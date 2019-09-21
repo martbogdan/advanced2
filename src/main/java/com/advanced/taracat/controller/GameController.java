@@ -44,7 +44,7 @@ public class GameController {
 
         String catError;
 
-        List<Cat> catCount = catRepository.findAll();
+        List<Cat> catCount = catRepository.findAllByUser_Username(currentUser.getUsername());
         int catCountSize = catCount.size();
         if (catCountSize >= 5) {
             catError = "У вас вже існує 5 котів, видаліть одного або декілька та добавте нового";
