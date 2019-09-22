@@ -108,6 +108,8 @@ public class TarakanController {
         model.addAttribute("marginB",tBot);
         System.out.println("User tarakan: "+tarName);
         System.out.println("BOT tarakan: "+ tarakanBot.getTarname());
+        System.out.println(tUser);
+        System.out.println(tBot);
         return "redirect:/tar";
     }
 }
