@@ -10,36 +10,36 @@
 
 	<div style="margin-bottom:10px;">UserName</div>
 	
-	<div style="width:700px;float:left;">
+	<div style="width:800px;float:left;">
 		<form method="post" action="/addcat">
 			<div style="width:250px;padding:10px;float:left;border:1px solid #000;">Create new Cat: <input type="text" name="catname" placeholder="Enter CatName" style="margin-right:10px;" />
 				<input type="submit" value="Create" /></div>
 		</form>
 		<div style="clear:both;"></div>
 		<div style="margin-top:10px;color:darkred;" th:text="${cat_error}"></div>
-		<form method="post" action="">
-			<div style="width:250px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+		<form method="post" action="catfight">
+			<div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
 				List of Cats:
 				<div style="height:15px;"></div>
 				<div th:each="cat : ${cats}">
-					<div th:text="${cat.name}"></div>
-					<div th:text="${cat.cat_level}"></div>
-					<div><a th:href="@{/delete_cat(catId=${cat.id})}">delete</a> </div>
+					<span th:text="${cat.name}"></span>[<span th:text="${cat.cat_level}"></span>] (<span th:text="${cat.cat_expirience}"></span>)
+                    ( Вибрати: <input type="radio" name="catuser" th:value="${cat.id}" /> ) | <span><a th:href="@{/delete_cat(catId=${cat.id})}">Видалити</a> </span>
+                    <div style="height:15px;"></div>
 				</div>
 			</div>
-			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="Fight!"></div>
-			<div style="width:250px;margin-top:25px;padding:10px;float:right;border:1px solid #000;">
+			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="В бій!"></div>
+			<div style="width:300px;margin-top:25px;padding:10px;float:right;border:1px solid #000;">
 				List of BotCats:
 				<div style="height:15px;"></div>
-				<div style="float:left;">BotCat1[1] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="float:left;">BotCat1[1] ( Вибрати: <input type="radio" name="catbot" value="1" /> )</div>
 				<div style="height:10px;clear:both;"></div>
-				<div style="float:left;">BotCat2[2] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="float:left;">BotCat2[2] ( Вибрати: <input type="radio" name="catbot" value="2" /> )</div>
 				<div style="height:10px;clear:both;"></div>
-				<div style="float:left;">BotCat3[3] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="float:left;">BotCat3[3] ( Вибрати: <input type="radio" name="catbot" value="3" /> )</div>
 				<div style="height:10px;clear:both;"></div>
-				<div style="float:left;">BotCat4[4] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="float:left;">BotCat4[4] ( Вибрати: <input type="radio" name="catbot" value="4" /> )</div>
 				<div style="height:10px;clear:both;"></div>
-				<div style="float:left;">BotCat5[5] ( Choose: <input type="radio" name="y" /> )</div>
+				<div style="float:left;">BotCat5[5] ( Вибрати: <input type="radio" name="catbot" value="5" /> )</div>
 				<div style="height:10px;clear:both;"></div>
 			</div>
 		</form>
