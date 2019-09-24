@@ -20,7 +20,7 @@
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:115px;" th:text="${tarakanName}">Taracan1</div>-->
 		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
 		<script th:inline="javascript">
-			tarU.onclick = function() {
+			tarU.onload = function() {
 				let start = Date.now();
 				let way = [[${wayUser}]];
 				let k = 2000/(way*7);
@@ -41,7 +41,7 @@
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:240px;" th:text="${tarakanBotName}">Taracan2</div>-->
 		<img id="tarB" src="../static/images/tarB.png" width="60" th:src="@{images/tarB.png}">
 		<script th:inline="javascript">
-			tarB.onclick = function() {
+			tarB.onload = function() {
 				let start = Date.now();
 				let way = [[${wayBot}]];
 				let k = 2000/(way*7);
@@ -63,6 +63,7 @@
 
 	<input type="submit" value="Go!" />
 </form>
+<div>Winner: <span th:text="${winner}"></span></div>
 
 </body>
 </html>

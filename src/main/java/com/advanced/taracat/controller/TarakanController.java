@@ -82,6 +82,10 @@ public class TarakanController {
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
         if (tarakanUser.getLevel()==1){
             tarakanBot = tarakanService.getTarakanByName("bot1");
+        } else if (tarakanUser.getLevel()==2){
+            tarakanBot = tarakanService.getTarakanByName("bot2");
+        } else if (tarakanUser.getLevel()==3){
+            tarakanBot = tarakanService.getTarakanByName("bot3");
         }
         String tarName = tarakanUser.getTarname();
         System.out.println("User tarakan: "+tarName);
@@ -114,6 +118,15 @@ public class TarakanController {
 
         model.addAttribute("wayUser",wayUser);
         model.addAttribute("wayBot",wayBot);
+        String winner;
+        if (wayUser > wayBot){
+            winner = tarakanUser.getTarname();
+        }else  if (wayUser < wayBot){
+            winner = tarakanBot.getTarname();
+        }else {
+            winner = "Friendship won!!!";
+        }
+        model.addAttribute("winner", winner);
 
         return "tar";
     }
