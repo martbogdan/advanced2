@@ -151,4 +151,12 @@ public class TarakanController {
 
         return "forward:/tar";
     }
+    @GetMapping ("/reload")
+    public String reload (){
+        return "redirect:/tar";
+    }
+    @GetMapping ("/back_to_list")
+    public String backToList (){
+        return "redirect:/tarlist";
+    }
 }

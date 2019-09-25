@@ -63,7 +63,10 @@
 
 	<input type="submit" value="Go!" />
 </form>
-<div>Winner: <span th:text="${winner}"></span></div>
+<form method="get" action="/back_to_list">
+	<input type="submit" value="choose other tarakan" />
+</form>
+<h3><div>Winner: <span th:text="${winner}"></span></div></h3>
 
 </body>
 </html>
