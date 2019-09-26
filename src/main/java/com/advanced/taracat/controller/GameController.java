@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class GameController {
@@ -71,6 +72,87 @@ public class GameController {
         return "cat";
     }
 
+
+    @PostMapping("catfight")
+    public String catFight (@RequestParam Long catid, @RequestParam int catbot, Model model){
+        Cat cat = new Cat();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User currentUser = userService.getUserByUsername(userName);
+
+        cat = catRepository.findCatById(catid);
+
+        int cat_Hp = cat.getCat_level() * 10;
+        int catLast_Hp = cat.getCat_level() * 10;
+        int catBot_Hp = catbot * 10;
+        int catBotLast_Hp = catbot * 10;
+
+
+        model.addAttribute("catid", cat.getId());
+        model.addAttribute("catname", cat.getName());
+        model.addAttribute("catlevel", cat.getCat_level());
+        model.addAttribute("cathpstart", cat_Hp);
+        model.addAttribute("cathpfinish", catLast_Hp);
+
+        model.addAttribute("catbotname", "Кіт Бот "+catbot+"-ого рівня");
+        model.addAttribute("catbot", catbot);
+        model.addAttribute("catbothpstart", catBot_Hp);
+        model.addAttribute("catbothpfinish", catBotLast_Hp);
+
+        return "cat_fight";
+    }
+
+    @PostMapping("catfightkick")
+    public String catFight (@RequestParam Long catid, @RequestParam int catattack, @RequestParam int catdeff, @RequestParam Long catbot, @RequestParam int cathpfinish, @RequestParam int catbothpfinish, Model model){
+
+        Cat cat = new Cat();
+        Random random = new Random();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User currentUser = userService.getUserByUsername(userName);
+
+        cat = catRepository.findCatById(catid);
+
+        int catbotattack = random.nextInt(4);
+        int catbotdeff = random.nextInt(4);
+
+        int catStright = random.nextInt(cat.getCat_level());
+        int catBotStright = random.nextInt(catbot.intValue());
+
+        if (catattack == catbotdeff) {
+            catattack = 0;
+        } else {
+            catbothpfinish = catbothpfinish-catStright;
+        }
+        if (catdeff == catbotattack) {
+            catdeff = 0;
+        } else {
+            cathpfinish = cathpfinish-catBotStright;
+        }
+
+
+        int cat_Hp = cat.getCat_level() * 10;
+        int catLast_Hp = cathpfinish;
+
+        Long catBot_Hp = catbot * 10;
+        int catBotLast_Hp = catbothpfinish;
+
+        model.addAttribute("catid", cat.getId());
+        model.addAttribute("catname", cat.getName());
+        model.addAttribute("catlevel", cat.getCat_level());
+        model.addAttribute("cathpstart", cat_Hp);
+        model.addAttribute("cathpfinish", catLast_Hp);
+
+        model.addAttribute("catbot", catbot);
+        model.addAttribute("catbotname", "Кіт Бот "+catbot+"-ого рівня");
+        model.addAttribute("catbothpstart", catBot_Hp);
+        model.addAttribute("catbothpfinish", catBotLast_Hp);
+
+        return "cat_fight";
+
+    }
 
     // Метод видалення кота.
     @GetMapping("/delete_cat")

@@ -23,7 +23,7 @@
 				<div style="height:15px;"></div>
 				<div th:each="cat : ${cats}">
 					<span th:text="${cat.name}"></span>[<span th:text="${cat.cat_level}"></span>] (<span th:text="${cat.cat_expirience}"></span>)
-                    ( Вибрати: <input type="radio" name="catuser" th:value="${cat.id}" /> ) | <span><a th:href="@{/delete_cat(catId=${cat.id})}">Видалити</a> </span>
+                    ( Вибрати: <input type="radio" name="catid" th:value="${cat.id}" /> ) | <span><a th:href="@{/delete_cat(catId=${cat.id})}">Видалити</a> </span>
                     <div style="height:15px;"></div>
 				</div>
 			</div>
