@@ -15,12 +15,12 @@
 </head>
 <body style="padding:10px;">
 
-<div style="width:700px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;"><input type="hidden" name="tarid" th:value="${tarakanUser.id}">
+<div style="width:700px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;"><input type="hidden" name="tarId" th:value="${tarId}"><input type="hidden" name="tarBotId" th:value="${tarBotId}">
 	<div style="width:700px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:115px;" th:text="${tarakanName}">Taracan1</div>-->
 		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
 		<script th:inline="javascript">
-			tarU.onload = function() {
+			tarU.onsubmit = function() {
 				let start = Date.now();
 				let way = [[${wayUser}]];
 				let k = 2000/(way*7);
@@ -35,13 +35,13 @@
 				}, 20);
 			}
 		</script>
-		<div><input type="hidden" th:value="${tarakanUser.id}"><span th:text="${tarakanName}"></span></div>
+		<div><input type="hidden" th:value="${tarId}"><span th:text="${tarakanName}"></span></div>
 	</div>
 	<div style="width:700px;height:100px;border:1px solid #ccc;">
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:240px;" th:text="${tarakanBotName}">Taracan2</div>-->
 		<img id="tarB" src="../static/images/tarB.png" width="60" th:src="@{images/tarB.png}">
 		<script th:inline="javascript">
-			tarB.onload = function() {
+			tarB.onsubmit = function() {
 				let start = Date.now();
 				let way = [[${wayBot}]];
 				let k = 2000/(way*7);
@@ -56,11 +56,13 @@
 				}, 20);
 			}
 		</script>
-		<div><input type="hidden" th:value="${tarakanBot.id}"><span th:text="${tarakanBotName}"></span></div>
+		<div><input type="hidden" th:value="${tarBotId}"><span th:text="${tarakanBotName}"></span></div>
 	</div>
 </div>
 
 <form method="get" action="run_tarakan">
+	<input type="hidden" name="tarId" th:value="${tarId}">
+	<input type="hidden" name="tarBotId" th:value="${tarBotId}">
 	<input type="submit" value="Go!" />
 </form>
 <form method="get" action="/back_to_list">
