@@ -105,15 +105,9 @@ public class TarakanController {
     @GetMapping ("/run_tarakan")
     public String runTarakan (@RequestParam Long tarId, @RequestParam Long tarBotId, Model model){
 
-        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanBot = tarakanService.getTarakanById(tarBotId);
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        if (tarakanUser.getLevel()==1){
-            tarakanBot = tarakanService.getTarakanByName("bot1");
-        } else if (tarakanUser.getLevel()==2){
-            tarakanBot = tarakanService.getTarakanByName("bot2");
-        } else if (tarakanUser.getLevel()==3){
-            tarakanBot = tarakanService.getTarakanByName("bot3");
-        }
+
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
         model.addAttribute("tarakanBotName",tarakanBot.getTarname());
@@ -153,7 +147,7 @@ public class TarakanController {
         model.addAttribute("winner", winner);
         model.addAttribute("tarId",tarakanUser.getId());
         model.addAttribute("tarBotId",tarakanBot.getId());
-        return "forward:/tar";
+        return "tar";
     }
     @GetMapping ("/reload")
     public String reload (){

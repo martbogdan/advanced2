@@ -20,20 +20,20 @@
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:115px;" th:text="${tarakanName}">Taracan1</div>-->
 		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
 		<script th:inline="javascript">
-			tarU.onsubmit = function() {
-				let start = Date.now();
-				let way = [[${wayUser}]];
-				let k = 2000/(way*7);
+				tarU.onload= function() {
+					let start = Date.now();
+					let way = [[${wayUser}]];
+					let k = 2000/(way*7);
 
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
+					let timer = setInterval(function() {
+						let timePassed = Date.now() - start;
 
-					tarU.style.left = timePassed/k + 'px';
+						tarU.style.left = timePassed/k + 'px';
 
-					if (timePassed > 2000) clearInterval(timer);
+						if (timePassed > 2000) clearInterval(timer);
 
-				}, 20);
-			}
+					}, 20);
+				}
 		</script>
 		<div><input type="hidden" th:value="${tarId}"><span th:text="${tarakanName}"></span></div>
 	</div>
@@ -41,20 +41,20 @@
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:240px;" th:text="${tarakanBotName}">Taracan2</div>-->
 		<img id="tarB" src="../static/images/tarB.png" width="60" th:src="@{images/tarB.png}">
 		<script th:inline="javascript">
-			tarB.onsubmit = function() {
-				let start = Date.now();
-				let way = [[${wayBot}]];
-				let k = 2000/(way*7);
+				tarB.onload = function() {
+					let start = Date.now();
+					let way = [[${wayBot}]];
+					let k = 2000/(way*7);
 
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
+					let timer = setInterval(function() {
+						let timePassed = Date.now() - start;
 
-					tarB.style.left = timePassed/k + 'px';
+						tarB.style.left = timePassed/k + 'px';
 
-					if (timePassed > 2000) clearInterval(timer);
+						if (timePassed > 2000) clearInterval(timer);
 
-				}, 20);
-			}
+					}, 20);
+				}
 		</script>
 		<div><input type="hidden" th:value="${tarBotId}"><span th:text="${tarakanBotName}"></span></div>
 	</div>
@@ -63,7 +63,7 @@
 <form method="get" action="run_tarakan">
 	<input type="hidden" name="tarId" th:value="${tarId}">
 	<input type="hidden" name="tarBotId" th:value="${tarBotId}">
-	<input type="submit" value="Go!" />
+	<input type="submit" value="Go!" id="tarGo" />
 </form>
 <form method="get" action="/back_to_list">
 	<input type="submit" value="choose other tarakan" />
