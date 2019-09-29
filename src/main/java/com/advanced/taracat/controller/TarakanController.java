@@ -93,6 +93,24 @@ public class TarakanController {
         model.addAttribute("tarakanName", tarName);
         model.addAttribute("tarakanBotName",tarakanBot.getTarname());
 
+
+        model.addAttribute("tarakanUser", tarakanUser);
+        model.addAttribute("tarakanBot", tarakanBot);
+
+        return "tar";
+    }
+
+    @GetMapping ("/run_tarakan")
+    public String runTarakan (@RequestParam Long tarId, Model model){
+
+        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        if (tarakanUser.getLevel()==1){
+            tarakanBot = tarakanService.getTarakanByName("bot1");
+        }
+        String tarName = tarakanUser.getTarname();
+        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakanBotName",tarakanBot.getTarname());
         Random random = new Random();
         int wayUser = 0;
         int wayBot = 0;
@@ -127,29 +145,8 @@ public class TarakanController {
             winner = "Friendship won!!!";
         }
         model.addAttribute("winner", winner);
-
+        model.addAttribute("tarId",tarId);
         return "tar";
-    }
-
-    @GetMapping ("/run_tarakan")
-    public String runTarakan (@RequestParam String tarakanName, Model model){
-
-        Tarakan tarakanBot = new Tarakan();
-        Tarakan tarakanUser = tarakanService.getTarakanByName(tarakanName);
-        if (tarakanUser.getLevel()==1){
-            tarakanBot = tarakanService.getTarakanByName("bot1");
-        }
-        String tarName = tarakanUser.getTarname();
-        model.addAttribute("tarakanName", tarName);
-        model.addAttribute("tarakanBotName",tarakanBot.getTarname());
-
-
-
-
-        System.out.println("User tarakan: "+tarName);
-        System.out.println("BOT tarakan: "+ tarakanBot.getTarname());
-
-        return "forward:/tar";
     }
     @GetMapping ("/reload")
     public String reload (){

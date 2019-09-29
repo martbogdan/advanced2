@@ -14,8 +14,8 @@
 <title>TaraCat</title>
 </head>
 <body style="padding:10px;">
-<form method="get" action="run_tarakan">
-<div style="width:700px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
+
+<div style="width:700px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;"><input type="hidden" name="tarid" th:value="${tarakanUser.id}">
 	<div style="width:700px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:115px;" th:text="${tarakanName}">Taracan1</div>-->
 		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
@@ -35,7 +35,7 @@
 				}, 20);
 			}
 		</script>
-		<div th:text="${tarakanName}"></div>
+		<div><input type="hidden" th:value="${tarakanUser.id}"><span th:text="${tarakanName}"></span></div>
 	</div>
 	<div style="width:700px;height:100px;border:1px solid #ccc;">
 <!--		<div style="width:100px;height:100px;background-color:#c0c0c0;margin-left:240px;" th:text="${tarakanBotName}">Taracan2</div>-->
@@ -56,11 +56,11 @@
 				}, 20);
 			}
 		</script>
-		<div th:text="${tarakanBotName}" ></div>
+		<div><input type="hidden" th:value="${tarakanBot.id}"><span th:text="${tarakanBotName}"></span></div>
 	</div>
 </div>
 
-
+<form method="get" action="run_tarakan">
 	<input type="submit" value="Go!" />
 </form>
 <form method="get" action="/back_to_list">
