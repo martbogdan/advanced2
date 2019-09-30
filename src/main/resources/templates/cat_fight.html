@@ -38,7 +38,7 @@
 	</div>
 	<div style="margin:150px 25px 0px 25px;float:left;">VS</div>
 	<div style="padding:10px; border:1px solid #000;float:left;">
-		<div style="width:200px;float:left;"><input type="hidden" name="catbot" th:value="${catbot}"><span th:text="${catbotname}"></span> (<span th:text="${catbothpstart}"></span>/<input type="hidden" name="catbothpfinish" th:value="${catbothpfinish}"><span th:text="${catbothpfinish}"></span>)</div>
+		<div style="width:200px;float:left;"><input type="hidden" name="catbot" th:value="${catbot}"><input type="hidden" name="catbotid" th:value="${catbot}"><span th:text="${catbotname}"></span> (<span th:text="${catbothpstart}"></span>/<input type="hidden" name="catbothpfinish" th:value="${catbothpfinish}"><span th:text="${catbothpfinish}"></span>)</div>
 		<div style="clear:both;"></div>
 		<div style="width:150px;height:245px;margin-top:25px;background-color:#ccc;float:left;">Cat Image (Avatar)</div>
 		<div style="clear:both;"></div>
@@ -46,12 +46,8 @@
 	<div style="clear:both;height:25px;"></div>
 	<div style="text-align:center;margin-bottom:25px;"><input type="submit" value="Kick!" /></div>
 	<div style="padding:10px;width:545px;border:1px solid #000;">
-		<div style="padding:5px 0px">Round 2</div>
-		<div>ʳ� CatKolia ������ ��������� � ������ �� -5 hp, ���������� ��� </div>
-		<div>ʳ� CatSerhio ������ ��������� � ��� � ����� � ����, ��������� ���� � ������ �� -5 hp </div>
-		<div style="padding:5px 0px">Round 1</div>
-		<div>ʳ� CatKolia ������ ��������� � ������ �� -3 hp, ���������� ��� </div>
-		<div>ʳ� CatSerhio ������ ��������� � ��� � ����� � ����, ��������� ���� � ������ �� -3 hp </div>
+        <div th:text="${catmessage}"></div>
+        <div th:text="${catmessage2}"></div>
 	</div>
 
 </form>

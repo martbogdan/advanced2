@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -104,7 +105,7 @@ public class GameController {
     }
 
     @PostMapping("catfightkick")
-    public String catFight (@RequestParam Long catid, @RequestParam int catattack, @RequestParam int catdeff, @RequestParam Long catbot, @RequestParam int cathpfinish, @RequestParam int catbothpfinish, Model model){
+    public String catFight (@RequestParam Long catid, @RequestParam int catattack, @RequestParam int catdeff, @RequestParam Long catbot, @RequestParam int catbotid, @RequestParam int cathpfinish, @RequestParam int catbothpfinish, Model model){
 
         Cat cat = new Cat();
         Random random = new Random();
@@ -115,29 +116,43 @@ public class GameController {
 
         cat = catRepository.findCatById(catid);
 
-        int catbotattack = random.nextInt(4);
-        int catbotdeff = random.nextInt(4);
+        int catbotattack = random.nextInt(3)+1;
+        int catbotdeff = random.nextInt(3)+1;
 
-        int catStright = random.nextInt(cat.getCat_level());
-        int catBotStright = random.nextInt(catbot.intValue());
+        int catStright = random.nextInt(cat.getCat_level())+1;
+        int catBotStright = random.nextInt(catbotid)+1;
+
+        String catMessageFormation = "";
+        String catMessageFormation2 = "";
 
         if (catattack == catbotdeff) {
-            catattack = 0;
+            catMessageFormation = cat.getName() + " попав в блок";
         } else {
             catbothpfinish = catbothpfinish-catStright;
-        }
-        if (catdeff == catbotattack) {
-            catdeff = 0;
-        } else {
-            cathpfinish = cathpfinish-catBotStright;
+            catMessageFormation = cat.getName() + " вдарив на -" + catStright + " життя";
         }
 
+        if (catbotattack == catdeff) {
+            catMessageFormation2 = "Кіт Бот попав в блок";
+        } else {
+            cathpfinish = cathpfinish-catBotStright;
+            catMessageFormation2 = "Кіт Бот вдарив на -" + catBotStright + " життя";
+        }
 
         int cat_Hp = cat.getCat_level() * 10;
         int catLast_Hp = cathpfinish;
 
         Long catBot_Hp = catbot * 10;
         int catBotLast_Hp = catbothpfinish;
+
+        if (cathpfinish <= 0 && catbothpfinish >= 0) {
+            return "cat_loose";
+        } else if (catbothpfinish <= 0 && cathpfinish >= 0) {
+            int catexpirience = 100;
+            model.addAttribute("catexpirience", catexpirience);
+            return "cat_win";
+        }
+
 
         model.addAttribute("catid", cat.getId());
         model.addAttribute("catname", cat.getName());
@@ -149,6 +164,9 @@ public class GameController {
         model.addAttribute("catbotname", "Кіт Бот "+catbot+"-ого рівня");
         model.addAttribute("catbothpstart", catBot_Hp);
         model.addAttribute("catbothpfinish", catBotLast_Hp);
+
+        model.addAttribute("catmessage", catMessageFormation);
+        model.addAttribute("catmessage2", catMessageFormation2);
 
         return "cat_fight";
 
