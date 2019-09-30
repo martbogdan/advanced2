@@ -55,4 +55,14 @@ public class TarakanService {
             tarakanRepository.delete(toDelete.get());
         }
     }
+
+    public Tarakan update (Tarakan tarakan){
+        Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
+        tarakanDB.setExperience(tarakan.getExperience());
+        if (tarakan.getExperience()>5){
+            tarakanDB.setLevel(2);
+        }
+        tarakanRepository.save(tarakanDB);
+        return tarakanDB;
+    }
 }

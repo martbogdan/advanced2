@@ -139,6 +139,8 @@ public class TarakanController {
         String winner;
         if (wayUser > wayBot){
             winner = tarakanUser.getTarname();
+            tarakanUser.setExperience(6);
+            tarakanService.update(tarakanUser);
         }else  if (wayUser < wayBot){
             winner = tarakanBot.getTarname();
         }else {
