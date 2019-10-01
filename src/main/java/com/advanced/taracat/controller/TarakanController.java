@@ -78,15 +78,9 @@ public class TarakanController {
     }
     @GetMapping("/choose_tarakan")
     public String chooseTarakan(@RequestParam Long tarId, Model model){
-        Tarakan tarakanBot = new Tarakan();
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        if (tarakanUser.getLevel()==1){
-            tarakanBot = tarakanService.getTarakanByName("bot1");
-        } else if (tarakanUser.getLevel()==2){
-            tarakanBot = tarakanService.getTarakanByName("bot2");
-        } else if (tarakanUser.getLevel()==3){
-            tarakanBot = tarakanService.getTarakanByName("bot3");
-        }
+        Tarakan tarakanBot = tarakanService.selectBot(tarId);
+
         String tarName = tarakanUser.getTarname();
         System.out.println("User tarakan: "+tarName);
         System.out.println("BOT tarakan: "+ tarakanBot.getTarname());
@@ -105,8 +99,8 @@ public class TarakanController {
     @GetMapping ("/run_tarakan")
     public String runTarakan (@RequestParam Long tarId, @RequestParam Long tarBotId, Model model){
 
-        Tarakan tarakanBot = tarakanService.getTarakanById(tarBotId);
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        Tarakan tarakanBot = tarakanService.selectBot(tarId);
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
@@ -139,8 +133,7 @@ public class TarakanController {
         String winner;
         if (wayUser > wayBot){
             winner = tarakanUser.getTarname();
-            tarakanUser.setExperience(6);
-            tarakanService.update(tarakanUser);
+            tarakanService.updateLevel(tarakanUser);
         }else  if (wayUser < wayBot){
             winner = tarakanBot.getTarname();
         }else {

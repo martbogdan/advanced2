@@ -6,7 +6,6 @@ import com.advanced.taracat.dao.repository.TarakanRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,13 +55,42 @@ public class TarakanService {
         }
     }
 
-    public Tarakan update (Tarakan tarakan){
+    public Tarakan updateLevel (Tarakan tarakan){
         Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
-        tarakanDB.setExperience(tarakan.getExperience());
-        if (tarakan.getExperience()>5){
-            tarakanDB.setLevel(2);
+        tarakanDB.setExperience(tarakan.getExperience()+1);
+        if (tarakan.getExperience()>=100 && tarakan.getExperience()<=199 && tarakan.getLevel()==1){
+            tarakanDB.setLevel(tarakan.getLevel()+1);
+            tarakanDB.setStep(tarakan.getStep()+1);
+        }else
+        if (tarakan.getExperience()>=200 && tarakan.getExperience()<=299 && tarakan.getLevel()==2){
+            tarakanDB.setLevel(tarakan.getLevel()+1);
+            tarakanDB.setStep(tarakan.getStep()+1);
+        }else
+        if (tarakan.getExperience()>=300 && tarakan.getExperience()<=399 && tarakan.getLevel()==3){
+            tarakanDB.setLevel(tarakan.getLevel()+1);
+            tarakanDB.setStep(tarakan.getStep()+1);
+        }else
+        if (tarakan.getExperience()>=400 && tarakan.getExperience()<=499 && tarakan.getLevel()==4){
+            tarakanDB.setLevel(tarakan.getLevel()+1);
+            tarakanDB.setStep(tarakan.getStep()+1);
         }
         tarakanRepository.save(tarakanDB);
         return tarakanDB;
+    }
+    public Tarakan selectBot (Long id){
+        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanUser = tarakanRepository.findById(id).orElseThrow(NotFoundException::new);
+        if (tarakanUser.getLevel()==1){
+            tarakanBot = tarakanRepository.findByTarname("bot1");
+        } else if (tarakanUser.getLevel()==2){
+            tarakanBot = tarakanRepository.findByTarname("bot2");
+        } else if (tarakanUser.getLevel()==3){
+            tarakanBot = tarakanRepository.findByTarname("bot3");
+        } else if (tarakanUser.getLevel()==4){
+            tarakanBot = tarakanRepository.findByTarname("bot4");
+        } else if (tarakanUser.getLevel()==5){
+            tarakanBot = tarakanRepository.findByTarname("bot5");
+        }
+        return tarakanBot;
     }
 }
