@@ -47,6 +47,7 @@ public class TarakanService {
         tarakan.setStep(3);
         tarakan.setLoss(0);
         tarakan.setWin(0);
+        tarakan.setDraw(0);
         tarakan.setRunning(0);
         return tarakanRepository.save(tarakan);
     }
