@@ -134,11 +134,15 @@ public class TarakanController {
         if (wayUser > wayBot){
             winner = tarakanUser.getTarname();
             tarakanService.updateLevel(tarakanUser);
+            tarakanService.updateWin(tarakanUser);
         }else  if (wayUser < wayBot){
             winner = tarakanBot.getTarname();
+            tarakanService.updateLoss(tarakanUser);
         }else {
             winner = "Friendship won!!!";
+            tarakanService.updateDraw(tarakanUser);
         }
+        tarakanService.updateRuning(tarakanUser);
         model.addAttribute("winner", winner);
         model.addAttribute("tarId",tarakanUser.getId());
         model.addAttribute("tarBotId",tarakanBot.getId());

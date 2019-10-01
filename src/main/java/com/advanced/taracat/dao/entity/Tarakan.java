@@ -3,7 +3,6 @@ package com.advanced.taracat.dao.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -17,6 +16,10 @@ public class Tarakan {
     private Integer level;
     private Integer experience;
     private Integer step;
+    private Integer running;
+    private Integer win;
+    private Integer loss;
+    private Integer draw;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

@@ -45,6 +45,9 @@ public class TarakanService {
         tarakan.setLevel(1);
         tarakan.setExperience(0);
         tarakan.setStep(3);
+        tarakan.setLoss(0);
+        tarakan.setWin(0);
+        tarakan.setRunning(0);
         return tarakanRepository.save(tarakan);
     }
 
@@ -77,6 +80,35 @@ public class TarakanService {
         tarakanRepository.save(tarakanDB);
         return tarakanDB;
     }
+
+    public Tarakan updateWin (Tarakan tarakan){
+        Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
+        tarakanDB.setWin(tarakan.getWin()+1);
+        tarakanRepository.save(tarakanDB);
+        return tarakanDB;
+    }
+
+    public Tarakan updateLoss (Tarakan tarakan){
+        Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
+        tarakanDB.setLoss(tarakan.getLoss()+1);
+        tarakanRepository.save(tarakanDB);
+        return tarakanDB;
+    }
+
+    public Tarakan updateDraw (Tarakan tarakan){
+        Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
+        tarakanDB.setDraw(tarakan.getDraw()+1);
+        tarakanRepository.save(tarakanDB);
+        return tarakanDB;
+    }
+
+    public Tarakan updateRuning (Tarakan tarakan){
+        Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
+        tarakanDB.setRunning(tarakan.getDraw()+tarakan.getWin()+tarakan.getLoss());
+        tarakanRepository.save(tarakanDB);
+        return tarakanDB;
+    }
+
     public Tarakan selectBot (Long id){
         Tarakan tarakanBot = new Tarakan();
         Tarakan tarakanUser = tarakanRepository.findById(id).orElseThrow(NotFoundException::new);
