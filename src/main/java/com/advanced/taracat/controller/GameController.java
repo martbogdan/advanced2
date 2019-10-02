@@ -63,6 +63,7 @@ public class GameController {
                 cat.setName(catname);
                 cat.setCat_level(1);
                 cat.setCat_expirience(0);
+                cat.setCat_maxexpirience(1000);
                 catRepository.save(cat);
                 catError = "";
             }
@@ -164,6 +165,9 @@ public class GameController {
                     catexpirience = catexpirience * (cat.getCat_level() - catbotid);
                 }
             }
+
+            int exp = cat.getCat_expirience();
+            cat.setCat_expirience(catexpirience+exp);
 
             catService.updateExpirience(cat);
 

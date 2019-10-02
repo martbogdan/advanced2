@@ -3,6 +3,7 @@ package com.advanced.taracat.service;
 import com.advanced.taracat.dao.entity.Cat;
 import com.advanced.taracat.dao.repository.CatRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Optional;
 
 @Service
 public class CatService {
+
+    @Autowired
     private CatRepository catRepository;
 
     public List<Cat> getAll(){
@@ -31,18 +34,26 @@ public class CatService {
         return catRepository.save(tarakan);
     }
 
-    public void updateExpirience (Cat cat){
+    public Cat updateExpirience (Cat cat){
 
         Cat catDB = catRepository.findById(cat.getId()).get();
 
+        int newExp = cat.getCat_expirience();
+        int lastExp = cat.getCat_maxexpirience();
+        int catLevel = cat.getCat_level();
 
-        int lastExp = catDB.getCat_expirience();
+        if (newExp >= lastExp) {
+            cat.setCat_expirience(0);
+            cat.setCat_level(catLevel+1);
+        } else {
+            cat.setCat_expirience(newExp);
+            cat.setCat_level(catLevel);
+        }
 
-        /*if (lastExp < (lastExp + cat.getCat_expirience())) {
+        catRepository.save(cat);
 
-        } else if ((getCatById(id).getCat_expirience() + catExpirience) >= lastExp) {
+        return cat;
 
-        }*/
     }
 
     public void delete (Long id){
