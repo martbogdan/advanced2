@@ -148,7 +148,25 @@ public class GameController {
         if (cathpfinish <= 0 && catbothpfinish >= 0) {
             return "cat_loose";
         } else if (catbothpfinish <= 0 && cathpfinish >= 0) {
+
             int catexpirience = 100;
+
+            if (cat.getCat_level() > catbotid) {
+                if ((cat.getCat_level() - catbotid) == 1) {
+                    catexpirience = catexpirience / 2;
+                } else {
+                    catexpirience = catexpirience / (cat.getCat_level() - catbotid);
+                }
+            } else if (cat.getCat_level() < catbotid) {
+                if ((cat.getCat_level() - catbotid) == 1) {
+                    catexpirience = catexpirience * 2;
+                } else {
+                    catexpirience = catexpirience * (cat.getCat_level() - catbotid);
+                }
+            }
+
+            catService.updateExpirience(cat);
+
             model.addAttribute("catexpirience", catexpirience);
             return "cat_win";
         }

@@ -31,6 +31,20 @@ public class CatService {
         return catRepository.save(tarakan);
     }
 
+    public void updateExpirience (Cat cat){
+
+        Cat catDB = catRepository.findById(cat.getId()).get();
+
+
+        int lastExp = catDB.getCat_expirience();
+
+        /*if (lastExp < (lastExp + cat.getCat_expirience())) {
+
+        } else if ((getCatById(id).getCat_expirience() + catExpirience) >= lastExp) {
+
+        }*/
+    }
+
     public void delete (Long id){
         Optional<Cat> toDelete = catRepository.findById(id);
         if (toDelete.isPresent()){

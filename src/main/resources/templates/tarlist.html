@@ -38,13 +38,11 @@
 <form th:method="get" th:action="@{tarlist}">
 <div style="margin-top:10px;color:darkred;" th:text="${tar_error}"></div>
 <h5>Список тараканів</h5>
-    <div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;" th:each="tarakan : ${tarakans}">
-        <div th:text="${tarakan.tarname}"></div>
-        <div th:text="${tarakan.level}"></div>
-        <div th:text="${tarakan.experience}"></div>
-        <div th:text="${tarakan.step}"></div>
-        <div><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </div>
-        <div><a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a> </div>
+    <div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+        <div th:each="tarakan : ${tarakans}">
+            <span th:text="${tarakan.tarname}"></span> [<span th:text="${tarakan.level}"></span>] (<span th:text="${tarakan.experience}"></span>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a>&nbsp;&nbsp;&nbsp;<a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a>
+            <div style="height:15px;"></div>
+        </div>
 <!--        <div> <input type="radio" name="tarId" th:value="${tarakan.id}"/></div>-->
     </div>
 <!--    <div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="RUN!" th:action="@{tar}"></div>-->

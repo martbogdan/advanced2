@@ -21,6 +21,7 @@ public class Cat {
     private int cat_hp;
     private int cat_level;
     private int cat_expirience;
+    private int cat_maxexpirience;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
