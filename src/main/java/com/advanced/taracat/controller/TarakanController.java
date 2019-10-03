@@ -100,7 +100,7 @@ public class TarakanController {
     public String runTarakan (@RequestParam Long tarId, @RequestParam Long tarBotId, Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot = tarakanService.selectBot(tarId);
+        Tarakan tarakanBot = tarakanService.selectRandomBot();
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class TarakanService {
@@ -128,6 +129,25 @@ public class TarakanService {
         } else if (tarakanUser.getLevel()==5){
             tarakanBot.setTarname("bot Level 5");
             tarakanBot.setStep(7);
+        }
+        return tarakanBot;
+    }
+    public Tarakan selectRandomBot(){
+        Tarakan tarakanBot = new Tarakan();
+        Random random = new Random();
+        int tarStep;
+        tarakanBot.setStep(random.nextInt(5)+1);
+        tarStep = tarakanBot.getStep();
+        if (tarStep==1){
+            tarakanBot.setTarname("Bot Level 1");
+        } else if (tarStep==2){
+            tarakanBot.setTarname("Bot Level 2");
+        } else if (tarStep==3){
+            tarakanBot.setTarname("Bot Level 3");
+        } else if (tarStep==4){
+            tarakanBot.setTarname("Bot Level 4");
+        } else if (tarStep==5){
+            tarakanBot.setTarname("Bot Level 5");
         }
         return tarakanBot;
     }
