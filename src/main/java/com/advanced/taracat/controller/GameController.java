@@ -204,6 +204,15 @@ public class GameController {
         return "forward:/cat";
     }
 
+    @GetMapping("/labirynth")
+    public String labList(@RequestParam Long catId, Model model){
+        /*String catError = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
+        model.addAttribute("cat_error", catError);*/
+        return "labirynth";
+    }
+
 }
 /*
 Попередній коміт*/

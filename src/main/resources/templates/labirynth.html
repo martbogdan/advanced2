@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>TaraCat</title>
+<style>
+    .linkclass {
+        width:50px;
+        height:50px;
+        float:left;
+        border:1px solid #000;
+    }
+    .linkclass span{
+        width:20px;
+        height:18px;
+        text-align:center;
+        padding-top:2px;
+        display:block;
+        margin-left:15px;
+        margin-top:15px;
+    }
+    .here span{
+        background-color:green;
+        border-radius: 50%;
+        color:#fff;
+    }
+</style>
+</head>
+<body style="padding:10px;">
+
+<div style="padding:10px;float:left;">
+        <div class="linkclass here"><span>1</span></div>
+        <div class="linkclass here"><span>2</span></div>
+        <div class="linkclass here"><span>3</span></div>
+        <div class="linkclass here"><span>4</span></div>
+        <div class="linkclass here"><span>5</span></div>
+        <div class="linkclass here"><span>6</span></div>
+        <div class="linkclass here"><span>7</span></div>
+        <div class="linkclass here"><span>8</span></div>
+        <div class="linkclass here"><span>9</span></div>
+        <div class="linkclass here"><span>10</span></div>
+        <div style="clear:both;"></div>
+    <form method="post" action="room"><input type="submit" value="Наступна кімната" /><input type="hidden" name="nextroom" th:value="${roomid}" /></form>
+</div>
+
+</body>
+</html>

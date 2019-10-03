@@ -10,7 +10,7 @@
 
 	<div style="margin-bottom:10px;">UserName</div>
 	
-	<div style="width:1000px;float:left;">
+	<div style="width:1200px;float:left;">
 		<form method="post" action="/addcat">
 			<div style="width:250px;padding:10px;float:left;border:1px solid #000;">Create new Cat: <input type="text" name="catname" placeholder="Enter CatName" style="margin-right:10px;" />
 				<input type="submit" value="Create" /></div>
@@ -18,12 +18,12 @@
 		<div style="clear:both;"></div>
 		<div style="margin-top:10px;color:darkred;" th:text="${cat_error}"></div>
 		<form method="post" action="catfight">
-			<div style="width:400px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+			<div style="width:600px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
 				List of Cats:
 				<div style="height:15px;"></div>
 				<div th:each="cat : ${cats}">
 					<span th:text="${cat.name}"></span>[<span th:text="${cat.cat_level}"></span>] (<span th:text="${cat.cat_expirience}"></span> / <span th:text="${cat.cat_maxexpirience}"></span>)
-                    ( Вибрати: <input type="radio" name="catid" th:value="${cat.id}" /> ) | <span><a th:href="@{/delete_cat(catId=${cat.id})}">Видалити</a> </span>
+                    ( Вибрати: <input type="radio" name="catid" th:value="${cat.id}" /> )&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a th:href="@{/labirynth(catId=${cat.id})}">В лабіринт</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a th:href="@{/arena(catId=${cat.id})}">На арену</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span><a th:href="@{/delete_cat(catId=${cat.id})}">Видалити</a> </span>
                     <div style="height:15px;"></div>
 				</div>
 			</div>
