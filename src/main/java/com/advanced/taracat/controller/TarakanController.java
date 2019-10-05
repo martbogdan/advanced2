@@ -95,12 +95,43 @@ public class TarakanController {
         model.addAttribute("tarBotId",tarakanBot.getId());
         return "tar";
     }
+    @GetMapping("/choose_tarakan_six")
+    public String chooseTarakanSix(@RequestParam Long tarId, Model model){
+        Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        Tarakan tarakanBot1 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot2 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot3 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot4 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot5 = tarakanService.selectRandomBot();
+
+        String tarName = tarakanUser.getTarname();
+        System.out.println("User tarakan: "+tarName);
+        System.out.println("BOT tarakan: "+ tarakanBot1.getTarname());
+        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
+        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
+        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
+        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
+        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
+
+
+        model.addAttribute("tarakanUser", tarakanUser);
+        model.addAttribute("tarakanBot1", tarakanBot1);
+        model.addAttribute("tarakanBot2", tarakanBot2);
+        model.addAttribute("tarakanBot3", tarakanBot3);
+        model.addAttribute("tarakanBot4", tarakanBot4);
+        model.addAttribute("tarakanBot5", tarakanBot5);
+
+        model.addAttribute("tarId",tarakanUser.getId());
+
+        return "tar_six";
+    }
 
     @GetMapping ("/run_tarakan")
     public String runTarakan (@RequestParam Long tarId, @RequestParam Long tarBotId, Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot = tarakanService.selectRandomBot();
+        Tarakan tarakanBot = tarakanService.selectBot(tarId);
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
@@ -148,6 +179,83 @@ public class TarakanController {
         model.addAttribute("tarBotId",tarakanBot.getId());
         return "tar";
     }
+    @GetMapping ("/run_tarakan_six")
+    public String runTarakanSix (@RequestParam Long tarId,  Model model){
+
+        Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        Tarakan tarakanBot1 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot2 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot3 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot4 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot5 = tarakanService.selectRandomBot();
+
+        String tarName = tarakanUser.getTarname();
+        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
+        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
+        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
+        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
+        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
+        Random random = new Random();
+        int wayUser = 0;
+        int wayBot1 = 0;
+        int wayBot2 = 0;
+        int wayBot3 = 0;
+        int wayBot4 = 0;
+        int wayBot5 = 0;
+        int stepUser, stepBot1, stepBot2, stepBot3, stepBot4, stepBot5;
+        List<Integer> wayU = new ArrayList<>();
+        List<Integer> wayB = new ArrayList<>();
+        boolean isFinish = true;
+        while (isFinish){
+            stepUser = random.nextInt(tarakanUser.getStep()+1);
+            stepBot1 = random.nextInt(tarakanBot1.getStep()+1);
+            stepBot2 = random.nextInt(tarakanBot2.getStep()+1);
+            stepBot3 = random.nextInt(tarakanBot3.getStep()+1);
+            stepBot4 = random.nextInt(tarakanBot4.getStep()+1);
+            stepBot5 = random.nextInt(tarakanBot5.getStep()+1);
+            wayUser=wayUser+stepUser;
+            wayBot1=wayBot1+stepBot1;
+            wayBot2=wayBot2+stepBot2;
+            wayBot3=wayBot3+stepBot3;
+            wayBot4=wayBot4+stepBot4;
+            wayBot5=wayBot5+stepBot5;
+            wayU.add(wayUser);
+            wayB.add(wayBot1);
+            if (wayUser >= 100 || wayBot1 >= 100 || wayBot2 >= 100 ||wayBot3 >= 100 ||wayBot4 >= 100 ||wayBot5 >= 100){
+                isFinish = false;
+            }
+        }
+        System.out.println("User: "+wayU);
+        System.out.println("BOT:  "+wayB);
+        System.out.println("User: "+wayUser);
+        System.out.println("BOT:  "+wayBot1);
+
+        model.addAttribute("wayUser",wayUser);
+        model.addAttribute("wayBot1",wayBot1);
+        model.addAttribute("wayBot2",wayBot2);
+        model.addAttribute("wayBot3",wayBot3);
+        model.addAttribute("wayBot4",wayBot4);
+        model.addAttribute("wayBot5",wayBot5);
+//        String winner;
+//        if (wayUser > wayBot){
+//            winner = tarakanUser.getTarname();
+//            tarakanService.updateLevel(tarakanUser);
+//            tarakanService.updateWin(tarakanUser);
+//        }else  if (wayUser < wayBot){
+//            winner = tarakanBot.getTarname();
+//            tarakanService.updateLoss(tarakanUser);
+//        }else {
+//            winner = "Friendship won!!!";
+//            tarakanService.updateDraw(tarakanUser);
+//        }
+//        tarakanService.updateRuning(tarakanUser);
+//        model.addAttribute("winner", winner);
+        model.addAttribute("tarId",tarakanUser.getId());
+//        model.addAttribute("tarBotId",tarakanBot.getId());
+        return "tar_six";
+    }
+
     @GetMapping ("/reload")
     public String reload (){
         return "redirect:/tar";

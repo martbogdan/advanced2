@@ -136,19 +136,9 @@ public class TarakanService {
         Tarakan tarakanBot = new Tarakan();
         Random random = new Random();
         int tarStep;
-        tarakanBot.setStep(random.nextInt(5)+1);
+        tarakanBot.setStep(random.nextInt(5)+3);
         tarStep = tarakanBot.getStep();
-        if (tarStep==1){
-            tarakanBot.setTarname("Bot Level 1");
-        } else if (tarStep==2){
-            tarakanBot.setTarname("Bot Level 2");
-        } else if (tarStep==3){
-            tarakanBot.setTarname("Bot Level 3");
-        } else if (tarStep==4){
-            tarakanBot.setTarname("Bot Level 4");
-        } else if (tarStep==5){
-            tarakanBot.setTarname("Bot Level 5");
-        }
+        tarakanBot.setTarname("Bot Level "+(tarStep-2));
         return tarakanBot;
     }
 }
