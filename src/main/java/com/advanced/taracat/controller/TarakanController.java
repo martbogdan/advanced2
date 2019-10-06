@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 public class TarakanController {
@@ -197,12 +195,7 @@ public class TarakanController {
         model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
         model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
         Random random = new Random();
-        int wayUser = 0;
-        int wayBot1 = 0;
-        int wayBot2 = 0;
-        int wayBot3 = 0;
-        int wayBot4 = 0;
-        int wayBot5 = 0;
+        int wayUser = 0; int wayBot1 = 0; int wayBot2 = 0; int wayBot3 = 0; int wayBot4 = 0; int wayBot5 = 0;
         int stepUser, stepBot1, stepBot2, stepBot3, stepBot4, stepBot5;
         List<Integer> wayU = new ArrayList<>();
         List<Integer> wayB = new ArrayList<>();
@@ -237,6 +230,32 @@ public class TarakanController {
         model.addAttribute("wayBot3",wayBot3);
         model.addAttribute("wayBot4",wayBot4);
         model.addAttribute("wayBot5",wayBot5);
+
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(wayUser, tarakanUser.getTarname());
+        map.put(wayBot1, tarakanBot1.getTarname());
+        map.put(wayBot2, tarakanBot2.getTarname());
+        map.put(wayBot3, tarakanBot3.getTarname());
+        map.put(wayBot4, tarakanBot4.getTarname());
+        map.put(wayBot5, tarakanBot5.getTarname());
+        System.out.println(map);
+
+            Integer[] sortedKeys = new Integer[] { wayUser, wayBot1, wayBot2, wayBot3, wayBot4, wayBot5 };
+
+            List<Map.Entry<Integer, String>> entries = new ArrayList<>(map.entrySet());
+            Collections.sort(entries, new Comparator<Map.Entry<Integer, String>>() {
+                @Override
+                public int compare(Map.Entry<Integer, String> o1, Map.Entry<Integer, String> o2) {
+                    return o1.getKey().compareTo(o2.getKey());
+                }
+            });
+            Map<Integer, String> sortedMap = new LinkedHashMap<>();
+            for (Map.Entry<Integer, String> entry :entries){
+                sortedMap.put(entry.getKey(), entry.getValue());
+            }
+        System.out.println(sortedMap);
+        System.out.println();
+            model.addAttribute("place",sortedMap);
 //        String winner;
 //        if (wayUser > wayBot){
 //            winner = tarakanUser.getTarname();
