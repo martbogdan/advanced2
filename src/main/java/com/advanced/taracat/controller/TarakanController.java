@@ -240,13 +240,11 @@ public class TarakanController {
         map.put(wayBot5, tarakanBot5.getTarname());
         System.out.println(map);
 
-            Integer[] sortedKeys = new Integer[] { wayUser, wayBot1, wayBot2, wayBot3, wayBot4, wayBot5 };
-
             List<Map.Entry<Integer, String>> entries = new ArrayList<>(map.entrySet());
             Collections.sort(entries, new Comparator<Map.Entry<Integer, String>>() {
                 @Override
                 public int compare(Map.Entry<Integer, String> o1, Map.Entry<Integer, String> o2) {
-                    return o1.getKey().compareTo(o2.getKey());
+                    return o2.getKey().compareTo(o1.getKey());
                 }
             });
             Map<Integer, String> sortedMap = new LinkedHashMap<>();
@@ -255,7 +253,7 @@ public class TarakanController {
             }
         System.out.println(sortedMap);
         System.out.println(sortedMap.values());
-            model.addAttribute("place",sortedMap);
+        model.addAttribute("place",sortedMap);
 //        String winner;
 //        if (wayUser > wayBot){
 //            winner = tarakanUser.getTarname();
