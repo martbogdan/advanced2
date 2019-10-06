@@ -141,4 +141,15 @@ public class TarakanService {
         tarakanBot.setTarname("Bot Level "+(tarStep-2));
         return tarakanBot;
     }
+    public Tarakan selectRandomBotByUserLevel(Long id){
+        Tarakan tarakanBot = new Tarakan();
+        Tarakan tarakanUser = tarakanRepository.findById(id).orElseThrow(NotFoundException::new);
+        Random random = new Random();
+        int tarStep;
+        tarakanBot.setStep(random.nextInt(tarakanUser.getLevel())+3);
+        tarStep = tarakanBot.getStep();
+        tarakanBot.setTarname("Bot Level "+(tarStep-2));
+        return tarakanBot;
+    }
+
 }

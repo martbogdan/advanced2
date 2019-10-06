@@ -96,11 +96,11 @@ public class TarakanController {
     @GetMapping("/choose_tarakan_six")
     public String chooseTarakanSix(@RequestParam Long tarId, Model model){
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot1 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot2 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot3 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot4 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot5 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
         System.out.println("User tarakan: "+tarName);
@@ -181,11 +181,11 @@ public class TarakanController {
     public String runTarakanSix (@RequestParam Long tarId,  Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot1 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot2 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot3 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot4 = tarakanService.selectRandomBot();
-        Tarakan tarakanBot5 = tarakanService.selectRandomBot();
+        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
+        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
@@ -254,7 +254,7 @@ public class TarakanController {
                 sortedMap.put(entry.getKey(), entry.getValue());
             }
         System.out.println(sortedMap);
-        System.out.println();
+        System.out.println(sortedMap.values());
             model.addAttribute("place",sortedMap);
 //        String winner;
 //        if (wayUser > wayBot){
