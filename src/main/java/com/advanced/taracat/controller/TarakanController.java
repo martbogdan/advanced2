@@ -77,7 +77,7 @@ public class TarakanController {
     @GetMapping("/choose_tarakan")
     public String chooseTarakan(@RequestParam Long tarId, Model model){
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot = tarakanService.selectBot(tarId);
+        Tarakan tarakanBot = tarakanService.selectBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
         System.out.println("User tarakan: "+tarName);
@@ -129,7 +129,7 @@ public class TarakanController {
     public String runTarakan (@RequestParam Long tarId, @RequestParam Long tarBotId, Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot = tarakanService.selectBot(tarId);
+        Tarakan tarakanBot = tarakanService.selectBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);

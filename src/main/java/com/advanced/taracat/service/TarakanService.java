@@ -111,25 +111,11 @@ public class TarakanService {
         return tarakanDB;
     }
 
-    public Tarakan selectBot (Long id){
+    public Tarakan selectBotByUserLevel(Long id){
         Tarakan tarakanBot = new Tarakan();
         Tarakan tarakanUser = tarakanRepository.findById(id).orElseThrow(NotFoundException::new);
-        if (tarakanUser.getLevel()==1){
-            tarakanBot.setTarname("bot Level 1");
-            tarakanBot.setStep(3);
-        } else if (tarakanUser.getLevel()==2){
-            tarakanBot.setTarname("bot Level 2");
-            tarakanBot.setStep(4);
-        } else if (tarakanUser.getLevel()==3){
-            tarakanBot.setTarname("bot Level 3");
-            tarakanBot.setStep(5);
-        } else if (tarakanUser.getLevel()==4){
-            tarakanBot.setTarname("bot Level 4");
-            tarakanBot.setStep(6);
-        } else if (tarakanUser.getLevel()==5){
-            tarakanBot.setTarname("bot Level 5");
-            tarakanBot.setStep(7);
-        }
+        tarakanBot.setStep(tarakanUser.getStep());
+        tarakanBot.setTarname("bot Level "+tarakanUser.getLevel());
         return tarakanBot;
     }
     public Tarakan selectRandomBot(){
