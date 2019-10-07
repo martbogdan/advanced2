@@ -159,7 +159,7 @@ public class TarakanController {
         String winner;
         if (wayUser > wayBot){
             winner = tarakanUser.getTarname();
-            tarakanService.updateLevel(tarakanUser);
+            tarakanService.updateLevel(tarakanUser,1);
             tarakanService.updateWin(tarakanUser);
         }else  if (wayUser < wayBot){
             winner = tarakanBot.getTarname();

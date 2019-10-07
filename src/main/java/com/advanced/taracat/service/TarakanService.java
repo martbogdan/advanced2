@@ -58,9 +58,9 @@ public class TarakanService {
         }
     }
 
-    public Tarakan updateLevel (Tarakan tarakan){
+    public Tarakan updateLevel (Tarakan tarakan, int experience){
         Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
-        tarakanDB.setExperience(tarakan.getExperience()+1);
+        tarakanDB.setExperience(tarakan.getExperience()+experience);
         if (tarakan.getExperience()>=100 && tarakan.getExperience()<=199 && tarakan.getLevel()==1){
             tarakanDB.setLevel(tarakan.getLevel()+1);
             tarakanDB.setStep(tarakan.getStep()+1);
