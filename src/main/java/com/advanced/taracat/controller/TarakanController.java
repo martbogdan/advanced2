@@ -11,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
@@ -96,29 +93,29 @@ public class TarakanController {
     @GetMapping("/choose_tarakan_six")
     public String chooseTarakanSix(@RequestParam Long tarId, Model model){
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
+//        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
+//        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
+//        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
+//        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
+//        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
         System.out.println("User tarakan: "+tarName);
-        System.out.println("BOT tarakan: "+ tarakanBot1.getTarname());
+//        System.out.println("BOT tarakan: "+ tarakanBot1.getTarname());
         model.addAttribute("tarakanName", tarName);
-        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
-        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
-        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
-        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
-        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
+//        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
+//        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
+//        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
+//        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
+//        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
 
 
         model.addAttribute("tarakanUser", tarakanUser);
-        model.addAttribute("tarakanBot1", tarakanBot1);
-        model.addAttribute("tarakanBot2", tarakanBot2);
-        model.addAttribute("tarakanBot3", tarakanBot3);
-        model.addAttribute("tarakanBot4", tarakanBot4);
-        model.addAttribute("tarakanBot5", tarakanBot5);
+//        model.addAttribute("tarakanBot1", tarakanBot1);
+//        model.addAttribute("tarakanBot2", tarakanBot2);
+//        model.addAttribute("tarakanBot3", tarakanBot3);
+//        model.addAttribute("tarakanBot4", tarakanBot4);
+//        model.addAttribute("tarakanBot5", tarakanBot5);
 
         model.addAttribute("tarId",tarakanUser.getId());
 
@@ -178,7 +175,7 @@ public class TarakanController {
         return "tar";
     }
     @GetMapping ("/run_tarakan_six")
-    public String runTarakanSix (@RequestParam Long tarId,  Model model){
+    public String runTarakanSix (@RequestParam Long tarId, Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
         Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
@@ -186,6 +183,29 @@ public class TarakanController {
         Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
         Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
         Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
+
+        String[] names = {"Oggi", "Jeck", "Joi", "Di-di", "Marki"};
+
+        Random rnd = new Random();
+        List<String> freeNames = null;
+        String tName1 = null, tName2=null,tName3=null,tName4=null,tName5=null;
+        for (int i = 0; i < names.length; i++) {
+            if (freeNames == null || freeNames.size() == 0) {
+                freeNames = new ArrayList<>(Arrays.asList(names));
+            }
+            tName1 = freeNames.remove(rnd.nextInt(freeNames.size()));
+            tName2 = freeNames.remove(rnd.nextInt(freeNames.size()));
+            tName3 = freeNames.remove(rnd.nextInt(freeNames.size()));
+            tName4 = freeNames.remove(rnd.nextInt(freeNames.size()));
+            tName5 = freeNames.remove(rnd.nextInt(freeNames.size()));
+        }
+
+            tarakanBot1.setTarname(tName1+" "+tarakanBot1.getTarname());
+            tarakanBot2.setTarname(tName2+" "+tarakanBot2.getTarname());
+            tarakanBot3.setTarname(tName3+" "+tarakanBot3.getTarname());
+            tarakanBot4.setTarname(tName4+" "+tarakanBot4.getTarname());
+            tarakanBot5.setTarname(tName5+" "+tarakanBot5.getTarname());
+
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
@@ -231,24 +251,24 @@ public class TarakanController {
         model.addAttribute("wayBot4",wayBot4);
         model.addAttribute("wayBot5",wayBot5);
 
-        HashMap<Integer, String> map = new HashMap<>();
-        map.put(wayUser, tarakanUser.getTarname());
-        map.put(wayBot1, tarakanBot1.getTarname());
-        map.put(wayBot2, tarakanBot2.getTarname());
-        map.put(wayBot3, tarakanBot3.getTarname());
-        map.put(wayBot4, tarakanBot4.getTarname());
-        map.put(wayBot5, tarakanBot5.getTarname());
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(tarakanUser.getTarname(), wayUser);
+        map.put(tarakanBot1.getTarname(), wayBot1);
+        map.put(tarakanBot2.getTarname(), wayBot2);
+        map.put(tarakanBot3.getTarname(), wayBot3);
+        map.put(tarakanBot4.getTarname(), wayBot4);
+        map.put(tarakanBot5.getTarname(), wayBot5);
         System.out.println(map);
 
-            List<Map.Entry<Integer, String>> entries = new ArrayList<>(map.entrySet());
-            Collections.sort(entries, new Comparator<Map.Entry<Integer, String>>() {
+            List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
+            Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
                 @Override
-                public int compare(Map.Entry<Integer, String> o1, Map.Entry<Integer, String> o2) {
-                    return o2.getKey().compareTo(o1.getKey());
+                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                    return o2.getValue().compareTo(o1.getValue());
                 }
             });
-            Map<Integer, String> sortedMap = new LinkedHashMap<>();
-            for (Map.Entry<Integer, String> entry :entries){
+            Map<String, Integer> sortedMap = new LinkedHashMap<>();
+            for (Map.Entry<String, Integer> entry : entries){
                 sortedMap.put(entry.getKey(), entry.getValue());
             }
         System.out.println(sortedMap);
