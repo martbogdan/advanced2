@@ -239,6 +239,14 @@ public class TarakanController {
                 isFinish = false;
             }
         }
+        List<Integer> way = new ArrayList<>();
+        way.add(wayUser); way.add(wayBot1); way.add(wayBot2); way.add(wayBot3); way.add(wayBot4); way.add(wayBot5);
+        for (int i=0; i<way.size(); i++) {
+            if (way.get(i) >100){
+                way.set(i,100);
+            }
+        }
+        wayUser=way.get(0); wayBot1=way.get(1); wayBot2=way.get(2); wayBot3=way.get(3); wayBot4=way.get(4); wayBot5=way.get(5);
         System.out.println("User: "+wayU);
         System.out.println("BOT:  "+wayB);
         System.out.println("User: "+wayUser);
