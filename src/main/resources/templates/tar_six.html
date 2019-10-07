@@ -181,8 +181,10 @@
 <div>
 	<span th:text="${place}"></span>
 </div>
+<ol>
 <div th:each="place : ${place}">
-	<span th:text="${place.value}"></span> [<span th:text="${place.key}"></span>]
+	<li><span th:text="${place.value}"></span> [<span th:text="${place.key}"></span>]</li>
 </div>
+</ol>
 </body>
 </html>
