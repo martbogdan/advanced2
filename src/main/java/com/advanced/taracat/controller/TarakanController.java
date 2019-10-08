@@ -176,40 +176,30 @@ public class TarakanController {
     }
     @GetMapping ("/run_tarakan_six")
     public String runTarakanSix (@RequestParam Long tarId, @RequestParam int numOfTarakans, Model model){
-
-
-
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
         ArrayList<Tarakan> tarakanBots = (ArrayList<Tarakan>) tarakanService.generateTarakanBotsByUserLevel(tarId,numOfTarakans);
-        System.out.println(tarakanBots);
 
-
-        String[] names = {"Oggi", "Jeck", "Joi", "Di-di", "Marki"};
-
+        String[] names = {"Oggi", "Jeck", "Joi", "Di-di", "Marki","Iggo", "Lyolik", "Josh", "Do-do", "Dodik"};
         Random rnd = new Random();
         List<String> freeNames = null;
         List<String> uniqNames = new ArrayList<>();
-
         for (int i = 0; i < names.length; i++) {
             if (freeNames == null || freeNames.size() == 0) {
                 freeNames = new ArrayList<>(Arrays.asList(names));
             }
             String tName = freeNames.remove(rnd.nextInt(freeNames.size()));
-
             uniqNames.add(i, tName);
-
         }
-
         for (int i=0; i<numOfTarakans; i++){
             tarakanBots.get(i).setTarname(uniqNames.get(i)+" "+tarakanBots.get(i).getTarname());
         }
-
         String tarName = tarakanUser.getTarname();
+
         model.addAttribute("tarakanName", tarName);
         model.addAttribute("tarakanBots",tarakanBots);
 
         Random random = new Random();
-        int wayUser = 0; int wayBot1 = 0; int wayBot2 = 0; int wayBot3 = 0; int wayBot4 = 0; int wayBot5 = 0; int wayBot = 0;
+        int wayUser = 0;
         int stepUser;
         List<Integer> stepsBot = new ArrayList<>();
         List<Integer> wayBots = new ArrayList<>();
@@ -219,45 +209,33 @@ public class TarakanController {
         boolean isFinish = true;
         while (isFinish){
             stepUser = random.nextInt(tarakanUser.getStep()+1);
+            wayUser=wayUser+stepUser;
             for (int i=0; i<numOfTarakans; i++){
                 stepsBot.set(i, random.nextInt(tarakanBots.get(i).getStep()+1));
                 wayBots.set(i, wayBots.get(i) + stepsBot.get(i));
                 tarakanBots.get(i).setWayForBot(wayBots.get(i));
             }
-            wayUser=wayUser+stepUser;
 
             wayU.add(wayUser);
-            wayB.add(wayBot1);
+
             for (int i=0; i<numOfTarakans; i++){
                 if (wayUser >= 100 || wayBots.get(i) >= 100){
                     isFinish = false;
                 }
             }
-
         }
         System.out.println("User: "+wayU);
         System.out.println("BOT:  "+wayB);
         System.out.println("User: "+wayUser);
-        System.out.println("BOT:  "+wayBot1);
 
         model.addAttribute("wayUser",wayUser);
         model.addAttribute("wayBots", wayBots);
-
-        model.addAttribute("wayBot1",wayBot1);
-        model.addAttribute("wayBot2",wayBot2);
-        model.addAttribute("wayBot3",wayBot3);
-        model.addAttribute("wayBot4",wayBot4);
-        model.addAttribute("wayBot5",wayBot5);
 
         HashMap<String,Integer> map = new HashMap<>();
         map.put(tarakanUser.getTarname(), wayUser);
         for (int i=0; i<numOfTarakans; i++){
             map.put(tarakanBots.get(i).getTarname(), wayBots.get(i));
         }
-
-
-        System.out.println(map);
-
             List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
             Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
                 @Override
