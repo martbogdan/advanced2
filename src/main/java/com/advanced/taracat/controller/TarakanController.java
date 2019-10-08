@@ -175,71 +175,65 @@ public class TarakanController {
         return "tar";
     }
     @GetMapping ("/run_tarakan_six")
-    public String runTarakanSix (@RequestParam Long tarId, Model model){
+    public String runTarakanSix (@RequestParam Long tarId, @RequestParam int numOfTarakans, Model model){
+
+
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-        ArrayList<Tarakan> tarakans = (ArrayList<Tarakan>) tarakanService.generateTarakanBotsByUserLevel(tarId,5);
-        System.out.println(tarakans);
-        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
-        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
+        ArrayList<Tarakan> tarakanBots = (ArrayList<Tarakan>) tarakanService.generateTarakanBotsByUserLevel(tarId,numOfTarakans);
+        System.out.println(tarakanBots);
+
 
         String[] names = {"Oggi", "Jeck", "Joi", "Di-di", "Marki"};
 
         Random rnd = new Random();
         List<String> freeNames = null;
-        String tName1 = null, tName2=null,tName3=null,tName4=null,tName5=null;
+        List<String> uniqNames = new ArrayList<>();
+
         for (int i = 0; i < names.length; i++) {
             if (freeNames == null || freeNames.size() == 0) {
                 freeNames = new ArrayList<>(Arrays.asList(names));
             }
-            tName1 = freeNames.remove(rnd.nextInt(freeNames.size()));
-            tName2 = freeNames.remove(rnd.nextInt(freeNames.size()));
-            tName3 = freeNames.remove(rnd.nextInt(freeNames.size()));
-            tName4 = freeNames.remove(rnd.nextInt(freeNames.size()));
-            tName5 = freeNames.remove(rnd.nextInt(freeNames.size()));
+            String tName = freeNames.remove(rnd.nextInt(freeNames.size()));
+
+            uniqNames.add(i, tName);
+
         }
 
-            tarakanBot1.setTarname(tName1+" "+tarakanBot1.getTarname());
-            tarakanBot2.setTarname(tName2+" "+tarakanBot2.getTarname());
-            tarakanBot3.setTarname(tName3+" "+tarakanBot3.getTarname());
-            tarakanBot4.setTarname(tName4+" "+tarakanBot4.getTarname());
-            tarakanBot5.setTarname(tName5+" "+tarakanBot5.getTarname());
-
+        for (int i=0; i<numOfTarakans; i++){
+            tarakanBots.get(i).setTarname(uniqNames.get(i)+" "+tarakanBots.get(i).getTarname());
+        }
 
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
-        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
-        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
-        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
-        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
-        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
+        model.addAttribute("tarakanBots",tarakanBots);
+
         Random random = new Random();
-        int wayUser = 0; int wayBot1 = 0; int wayBot2 = 0; int wayBot3 = 0; int wayBot4 = 0; int wayBot5 = 0;
-        int stepUser, stepBot1, stepBot2, stepBot3, stepBot4, stepBot5;
+        int wayUser = 0; int wayBot1 = 0; int wayBot2 = 0; int wayBot3 = 0; int wayBot4 = 0; int wayBot5 = 0; int wayBot = 0;
+        int stepUser;
+        List<Integer> stepsBot = new ArrayList<>();
+        List<Integer> wayBots = new ArrayList<>();
+        for (int i=0; i<numOfTarakans; i++){ stepsBot.add(0); wayBots.add(0);}
         List<Integer> wayU = new ArrayList<>();
         List<Integer> wayB = new ArrayList<>();
         boolean isFinish = true;
         while (isFinish){
             stepUser = random.nextInt(tarakanUser.getStep()+1);
-            stepBot1 = random.nextInt(tarakanBot1.getStep()+1);
-            stepBot2 = random.nextInt(tarakanBot2.getStep()+1);
-            stepBot3 = random.nextInt(tarakanBot3.getStep()+1);
-            stepBot4 = random.nextInt(tarakanBot4.getStep()+1);
-            stepBot5 = random.nextInt(tarakanBot5.getStep()+1);
+            for (int i=0; i<numOfTarakans; i++){
+                stepsBot.set(i, random.nextInt(tarakanBots.get(i).getStep()+1));
+                wayBots.set(i, wayBots.get(i) + stepsBot.get(i));
+                tarakanBots.get(i).setWayForBot(wayBots.get(i));
+            }
             wayUser=wayUser+stepUser;
-            wayBot1=wayBot1+stepBot1;
-            wayBot2=wayBot2+stepBot2;
-            wayBot3=wayBot3+stepBot3;
-            wayBot4=wayBot4+stepBot4;
-            wayBot5=wayBot5+stepBot5;
+
             wayU.add(wayUser);
             wayB.add(wayBot1);
-            if (wayUser >= 100 || wayBot1 >= 100 || wayBot2 >= 100 ||wayBot3 >= 100 ||wayBot4 >= 100 ||wayBot5 >= 100){
-                isFinish = false;
+            for (int i=0; i<numOfTarakans; i++){
+                if (wayUser >= 100 || wayBots.get(i) >= 100){
+                    isFinish = false;
+                }
             }
+
         }
         System.out.println("User: "+wayU);
         System.out.println("BOT:  "+wayB);
@@ -247,6 +241,8 @@ public class TarakanController {
         System.out.println("BOT:  "+wayBot1);
 
         model.addAttribute("wayUser",wayUser);
+        model.addAttribute("wayBots", wayBots);
+
         model.addAttribute("wayBot1",wayBot1);
         model.addAttribute("wayBot2",wayBot2);
         model.addAttribute("wayBot3",wayBot3);
@@ -255,11 +251,11 @@ public class TarakanController {
 
         HashMap<String,Integer> map = new HashMap<>();
         map.put(tarakanUser.getTarname(), wayUser);
-        map.put(tarakanBot1.getTarname(), wayBot1);
-        map.put(tarakanBot2.getTarname(), wayBot2);
-        map.put(tarakanBot3.getTarname(), wayBot3);
-        map.put(tarakanBot4.getTarname(), wayBot4);
-        map.put(tarakanBot5.getTarname(), wayBot5);
+        for (int i=0; i<numOfTarakans; i++){
+            map.put(tarakanBots.get(i).getTarname(), wayBots.get(i));
+        }
+
+
         System.out.println(map);
 
             List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
@@ -292,6 +288,7 @@ public class TarakanController {
 //        model.addAttribute("winner", winner);
         model.addAttribute("tarId",tarakanUser.getId());
 //        model.addAttribute("tarBotId",tarakanBot.getId());
+        System.out.println(tarakanBots.get(0).getWayForBot());
         return "tar_six";
     }
 

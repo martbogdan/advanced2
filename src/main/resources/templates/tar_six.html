@@ -1,16 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<style>
-		#tarU {
-			position: relative;
-			cursor: pointer;
-		}
+	<style th:each="tarakanBot : ${tarakanBots}">
+		#tarU {position: relative; cursor: pointer;}
+
 		#tarB {position: relative;cursor: pointer;}
-		#tarB2 {position: relative;cursor: pointer;}
-		#tarB3 {position: relative;cursor: pointer;}
-		#tarB4 {position: relative;cursor: pointer;}
-		#tarB5 {position: relative;cursor: pointer;}
+
 	</style>
 <title>TaraCat</title>
 </head>
@@ -18,11 +13,8 @@
 
 <div style="width:750px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
 	<input type="hidden" name="tarId" th:value="${tarId}">
-	<input type="hidden" name="tarBotName1" th:value="${tarakanBotName1}">
-	<input type="hidden" name="tarBotName2" th:value="${tarakanBotName2}">
-	<input type="hidden" name="tarBotName3" th:value="${tarakanBotName3}">
-	<input type="hidden" name="tarBotName4" th:value="${tarakanBotName4}">
-	<input type="hidden" name="tarBotName5" th:value="${tarakanBotName5}">
+<!--	<input type="hidden" name="tarakanBot" th:value="${tarakanBot.tarname}">-->
+
 
 	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 
@@ -45,13 +37,13 @@
 		</script>
 		<div><input type="hidden" th:value="${tarId}"><span th:text="${tarakanName}"></span></div>
 	</div>
-	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
+	<div th:each="tarakanBot : ${tarakanBots}" style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 
 		<img id="tarB" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
-		<script th:inline="javascript">
+		<script th:inline="javascript" >
 				tarB.onload = function() {
 					let start = Date.now();
-					let way = [[${wayBot1}]];
+					let way = [[${tarakanBot.wayForBot}]];
 					let k = 2000/(way*7);
 
 					let timer = setInterval(function() {
@@ -64,101 +56,18 @@
 					}, 20);
 				}
 		</script>
-		<div><input type="hidden" th:value="${tarakanBotName1}"><span th:text="${tarakanBotName1}"></span></div>
+		<div><input type="hidden" th:value="${tarakanBot.tarname}"><span th:text="${tarakanBot.tarname}"></span></div>
 	</div>
-	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 
-		<img id="tarB2" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
-		<script th:inline="javascript">
-			tarB2.onload = function() {
-				let start = Date.now();
-				let way = [[${wayBot2}]];
-				let k = 2000/(way*7);
-
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
-
-					tarB2.style.left = timePassed/k + 'px';
-
-					if (timePassed > 2000) clearInterval(timer);
-
-				}, 20);
-			}
-		</script>
-		<div><input type="hidden" th:value="${tarakanBotName2}"><span th:text="${tarakanBotName2}"></span></div>
-	</div>
-	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
-
-		<img id="tarB3" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
-		<script th:inline="javascript">
-			tarB3.onload = function() {
-				let start = Date.now();
-				let way = [[${wayBot3}]];
-				let k = 2000/(way*7);
-
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
-
-					tarB3.style.left = timePassed/k + 'px';
-
-					if (timePassed > 2000) clearInterval(timer);
-
-				}, 20);
-			}
-		</script>
-		<div><input type="hidden" th:value="${tarakanBotName3}"><span th:text="${tarakanBotName3}"></span></div>
-	</div>
-	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
-
-		<img id="tarB4" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
-		<script th:inline="javascript">
-			tarB4.onload = function() {
-				let start = Date.now();
-				let way = [[${wayBot4}]];
-				let k = 2000/(way*7);
-
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
-
-					tarB4.style.left = timePassed/k + 'px';
-
-					if (timePassed > 2000) clearInterval(timer);
-
-				}, 20);
-			}
-		</script>
-		<div><input type="hidden" th:value="${tarakanBotName4}"><span th:text="${tarakanBotName4}"></span></div>
-	</div>
-	<div style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
-
-		<img id="tarB5" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
-		<script th:inline="javascript">
-			tarB5.onload = function() {
-				let start = Date.now();
-				let way = [[${wayBot5}]];
-				let k = 2000/(way*7);
-
-				let timer = setInterval(function() {
-					let timePassed = Date.now() - start;
-
-					tarB5.style.left = timePassed/k + 'px';
-
-					if (timePassed > 2000) clearInterval(timer);
-
-				}, 20);
-			}
-		</script>
-		<div><input type="hidden" th:value="${tarakanBotName5}"><span th:text="${tarakanBotName5}"></span></div>
-	</div>
 </div>
 
 <form method="get" action="/run_tarakan_six">
 	<input type="hidden" name="tarId" th:value="${tarId}">
-	<input type="hidden" name="tarBotName1" th:value="${tarakanBotName1}">
-	<input type="hidden" name="tarBotName2" th:value="${tarakanBotName2}">
-	<input type="hidden" name="tarBotName3" th:value="${tarakanBotName3}">
-	<input type="hidden" name="tarBotName4" th:value="${tarakanBotName4}">
-	<input type="hidden" name="tarBotName5" th:value="${tarakanBotName5}">
+<input type="submit" name="numOfTarakans" value="1"/>
+	<input type="submit" name="numOfTarakans" value="2"/>
+	<input type="submit" name="numOfTarakans" value="3"/>
+	<input type="submit" name="numOfTarakans" value="4"/>
+	<input type="submit" name="numOfTarakans" value="5"/>
 	<input type="submit" value="Go!" id="tarGo" />
 </form>
 <form method="get" action="/back_to_list">
