@@ -135,5 +135,19 @@ public class TarakanService {
         tarakanBot.setTarname("Bot Level "+(tarStep-2));
         return tarakanBot;
     }
+    public List<Tarakan> generateTarakanBotsByUserLevel (Long userTarakanId, int numOfTarakans){
+        Tarakan tarakanUser = tarakanRepository.findById(userTarakanId).orElseThrow(NotFoundException::new);
+        Random random = new Random();
+        int tarStep;
+        ArrayList<Tarakan> tarakans = new ArrayList<>();
+        for (int i=0; i<numOfTarakans; i++){
+            Tarakan tarakan = new Tarakan();
+            tarakan.setStep(random.nextInt(tarakanUser.getLevel())+3);
+            tarStep = tarakan.getStep();
+            tarakan.setTarname("Bot Level "+(tarStep-2));
+            tarakans.add(tarakan);
+        }
+        return tarakans;
+    }
 
 }

@@ -178,6 +178,8 @@ public class TarakanController {
     public String runTarakanSix (@RequestParam Long tarId, Model model){
 
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
+        ArrayList<Tarakan> tarakans = (ArrayList<Tarakan>) tarakanService.generateTarakanBotsByUserLevel(tarId,5);
+        System.out.println(tarakans);
         Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
         Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
         Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
