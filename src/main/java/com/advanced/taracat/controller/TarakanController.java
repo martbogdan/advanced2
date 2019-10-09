@@ -224,6 +224,14 @@ public class TarakanController {
                 }
             }
         }
+
+        if (wayUser > 100){ wayUser=100;} //rouding max way of tarakan
+        for (int i=0; i<numOfTarakans; i++){
+            if (wayBots.get(i)>100){
+                wayBots.set(i,100);
+            }
+        }
+
         System.out.println("User: "+wayU);
         System.out.println("BOT:  "+wayB);
         System.out.println("User: "+wayUser);
@@ -265,8 +273,7 @@ public class TarakanController {
 //        tarakanService.updateRuning(tarakanUser);
 //        model.addAttribute("winner", winner);
         model.addAttribute("tarId",tarakanUser.getId());
-//        model.addAttribute("tarBotId",tarakanBot.getId());
-        System.out.println(tarakanBots.get(0).getWayForBot());
+
         return "tar_six";
     }
 
