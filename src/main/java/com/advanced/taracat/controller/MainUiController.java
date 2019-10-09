@@ -20,10 +20,6 @@ public class MainUiController {
     }
 
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
 
     @GetMapping("/game")
     public  String chooseGame() {
