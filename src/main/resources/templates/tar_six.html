@@ -4,7 +4,16 @@
 	<style >
 		#tarU {position: relative; cursor: pointer;}
 
-		#tarB {position: relative;cursor: pointer;}
+		#tarB0 {position: relative;cursor: pointer;}
+		#tarB1 {position: relative;cursor: pointer;}
+		#tarB2 {position: relative;cursor: pointer;}
+		#tarB3 {position: relative;cursor: pointer;}
+		#tarB4 {position: relative;cursor: pointer;}
+		#tarB5 {position: relative;cursor: pointer;}
+		#tarB6 {position: relative;cursor: pointer;}
+		#tarB7 {position: relative;cursor: pointer;}
+		#tarB8 {position: relative;cursor: pointer;}
+		#tarB9 {position: relative;cursor: pointer;}
 
 	</style>
 <title>TaraCat</title>
@@ -39,9 +48,9 @@
 	</div>
 	<div th:each="tarakanBot : ${tarakanBots}" style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 
-		<img id="tarB" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
+		<img id="${tarakanBot.imgId}" th:id="${tarakanBot.imgId}" src="../static/images/tarB.png" width="45" th:src="@{images/tarB.png}">
 		<script th:inline="javascript" >
-				tarB.onload = function() {
+			[(${tarakanBot.imgId})].onload = function() {
 					let start = Date.now();
 					let way = [[${tarakanBot.wayForBot}]];
 					let k = 2000/(way*7);
@@ -49,7 +58,7 @@
 					let timer = setInterval(function() {
 						let timePassed = Date.now() - start;
 
-						tarB.style.left = timePassed/k + 'px';
+						[(${tarakanBot.imgId})].style.left = timePassed/k + 'px';
 
 						if (timePassed > 2000) clearInterval(timer);
 

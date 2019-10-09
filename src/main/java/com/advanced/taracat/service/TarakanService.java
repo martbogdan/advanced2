@@ -145,6 +145,7 @@ public class TarakanService {
             tarakan.setStep(random.nextInt(tarakanUser.getLevel())+3);
             tarStep = tarakan.getStep();
             tarakan.setTarname("Bot Level "+(tarStep-2));
+            tarakan.setImgId("tarB"+i);
             tarakans.add(tarakan);
         }
         return tarakans;
