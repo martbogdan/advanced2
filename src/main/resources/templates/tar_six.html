@@ -1,19 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<style >
+	<style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
 		#tarU {position: relative; cursor: pointer;}
 
-		#tarB0 {position: relative;cursor: pointer;}
-		#tarB1 {position: relative;cursor: pointer;}
-		#tarB2 {position: relative;cursor: pointer;}
-		#tarB3 {position: relative;cursor: pointer;}
-		#tarB4 {position: relative;cursor: pointer;}
-		#tarB5 {position: relative;cursor: pointer;}
-		#tarB6 {position: relative;cursor: pointer;}
-		#tarB7 {position: relative;cursor: pointer;}
-		#tarB8 {position: relative;cursor: pointer;}
-		#tarB9 {position: relative;cursor: pointer;}
+		#[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
 
 	</style>
 <title>TaraCat</title>
