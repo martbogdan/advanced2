@@ -93,30 +93,10 @@ public class TarakanController {
     @GetMapping("/choose_tarakan_six")
     public String chooseTarakanSix(@RequestParam Long tarId, Model model){
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
-//        Tarakan tarakanBot1 = tarakanService.selectRandomBotByUserLevel(tarId);
-//        Tarakan tarakanBot2 = tarakanService.selectRandomBotByUserLevel(tarId);
-//        Tarakan tarakanBot3 = tarakanService.selectRandomBotByUserLevel(tarId);
-//        Tarakan tarakanBot4 = tarakanService.selectRandomBotByUserLevel(tarId);
-//        Tarakan tarakanBot5 = tarakanService.selectRandomBotByUserLevel(tarId);
 
         String tarName = tarakanUser.getTarname();
-        System.out.println("User tarakan: "+tarName);
-//        System.out.println("BOT tarakan: "+ tarakanBot1.getTarname());
         model.addAttribute("tarakanName", tarName);
-//        model.addAttribute("tarakanBotName1",tarakanBot1.getTarname());
-//        model.addAttribute("tarakanBotName2",tarakanBot2.getTarname());
-//        model.addAttribute("tarakanBotName3",tarakanBot3.getTarname());
-//        model.addAttribute("tarakanBotName4",tarakanBot4.getTarname());
-//        model.addAttribute("tarakanBotName5",tarakanBot5.getTarname());
-
-
         model.addAttribute("tarakanUser", tarakanUser);
-//        model.addAttribute("tarakanBot1", tarakanBot1);
-//        model.addAttribute("tarakanBot2", tarakanBot2);
-//        model.addAttribute("tarakanBot3", tarakanBot3);
-//        model.addAttribute("tarakanBot4", tarakanBot4);
-//        model.addAttribute("tarakanBot5", tarakanBot5);
-
         model.addAttribute("tarId",tarakanUser.getId());
 
         return "tar_six";
