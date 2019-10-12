@@ -76,6 +76,10 @@ public class TarakanService {
         if (tarakan.getExperience()>=400 && tarakan.getExperience()<=499 && tarakan.getLevel()==4){
             tarakanDB.setLevel(tarakan.getLevel()+1);
             tarakanDB.setStep(tarakan.getStep()+1);
+        }else if (tarakan.getExperience()<0){
+            tarakanDB.setExperience(0);
+            tarakanDB.setLevel(1);
+            tarakanDB.setStep(3);
         }
         tarakanRepository.save(tarakanDB);
         return tarakanDB;
