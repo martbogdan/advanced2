@@ -76,6 +76,10 @@ public class TarakanService {
         if (tarakan.getExperience()>=400 && tarakan.getExperience()<=499 && tarakan.getLevel()==4){
             tarakanDB.setLevel(tarakan.getLevel()+1);
             tarakanDB.setStep(tarakan.getStep()+1);
+        }else if (tarakan.getExperience()<0){
+            tarakanDB.setExperience(0);
+            tarakanDB.setLevel(1);
+            tarakanDB.setStep(3);
         }
         tarakanRepository.save(tarakanDB);
         return tarakanDB;
@@ -134,6 +138,32 @@ public class TarakanService {
         tarStep = tarakanBot.getStep();
         tarakanBot.setTarname("Bot Level "+(tarStep-2));
         return tarakanBot;
+    }
+    private static int getRandomNumberInRange(int min, int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+    public List<Tarakan> generateTarakanBotsByUserLevel (Long userTarakanId, int numOfTarakans){
+        Tarakan tarakanUser = tarakanRepository.findById(userTarakanId).orElseThrow(NotFoundException::new);
+        Random random = new Random();
+        int tarStep;
+        ArrayList<Tarakan> tarakans = new ArrayList<>();
+        for (int i=0; i<numOfTarakans; i++){
+            Tarakan tarakan = new Tarakan();
+            if (tarakanUser.getLevel()>1){
+                tarakan.setStep(getRandomNumberInRange(tarakanUser.getLevel()+1,tarakanUser.getLevel()+2));
+            }else {
+                tarakan.setStep(random.nextInt(tarakanUser.getLevel()) + 3);
+            }
+            tarStep = tarakan.getStep();
+            tarakan.setTarname("Bot Level "+(tarStep-2));
+            tarakan.setImgId("tarB"+i);
+            tarakans.add(tarakan);
+        }
+        return tarakans;
     }
 
 }

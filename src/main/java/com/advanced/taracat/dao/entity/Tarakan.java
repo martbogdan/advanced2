@@ -20,6 +20,8 @@ public class Tarakan {
     private Integer win;
     private Integer loss;
     private Integer draw;
+    private Integer wayForBot;
+    private String imgId;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
