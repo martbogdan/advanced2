@@ -8,9 +8,7 @@
     </form>
 </head>
 <body style="padding:10px;">
-
 <form th:action="@{/addtar}" th:object="${newTarakan}" method="post">
-
     <div class="form-group">
         <label>TarakanName</label>:
         <input type="text"
@@ -21,7 +19,6 @@
                autofocus="autofocus"
                placeholder="TarakanName">
     </div>
-
     <div class="form-group">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -36,13 +33,45 @@
 </form>
 <form th:method="get" th:action="@{tarlist}">
  <div style="margin-top:10px;color:darkred;" th:text="${tar_error}"></div>
-<h5>Список тараканів</h5>
-    <div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
-        <div th:each="tarakan : ${tarakans}">
-            <span th:text="${tarakan.tarname}"></span> [Level: <span th:text="${tarakan.level}"></span>] (Step: <span th:text="${tarakan.step}"></span>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a>&nbsp;&nbsp;&nbsp;<a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a><a th:href="@{/choose_tarakan_six(tarId=${tarakan.id})}">choose6</a>
-            <div style="height:15px;"></div>
-        </div>
-    </div>
+<div class="container">
+<h3>Cockroaches</h3>
+    <table class="table" align="">
+        <thead>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Max Step</th>
+        <th>Experience</th>
+        <th>Running</th>
+        <th>Win</th>
+        <th>Loss</th>
+        <th>Draw</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="tarakan : ${tarakans}">
+            <td th:text="${tarakan.tarname}"></td>
+            <td th:text="${tarakan.level}"></td>
+            <td th:text="${tarakan.step}"></td>
+            <td th:text="${tarakan.experience}"></td>
+            <td th:text="${tarakan.running}"></td>
+            <td th:text="${tarakan.win}"></td>
+            <td th:text="${tarakan.loss}"></td>
+            <td th:text="${tarakan.draw}"></td>
+            <td><div><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">Delete</a></div>
+                <div><a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">Play one road</a></div>
+                <div><a th:href="@{/choose_tarakan_six(tarId=${tarakan.id})}">Play multy road</a></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </form>
 </body>
 </html>
+
+<!--    <div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">-->
+<!--        <div th:each="tarakan : ${tarakans}">-->
+<!--            <span th:text="${tarakan.tarname}"></span> [Level: <span th:text="${tarakan.level}"></span>] (Step: <span th:text="${tarakan.step}"></span>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a>&nbsp;&nbsp;&nbsp;<a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a><a th:href="@{/choose_tarakan_six(tarId=${tarakan.id})}">choose6</a>-->
+<!--            <div style="height:15px;"></div>-->
+<!--        </div>-->
+<!--    </div>-->

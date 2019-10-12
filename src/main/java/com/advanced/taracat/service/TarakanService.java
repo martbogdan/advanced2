@@ -139,6 +139,13 @@ public class TarakanService {
         tarakanBot.setTarname("Bot Level "+(tarStep-2));
         return tarakanBot;
     }
+    private static int getRandomNumberInRange(int min, int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
     public List<Tarakan> generateTarakanBotsByUserLevel (Long userTarakanId, int numOfTarakans){
         Tarakan tarakanUser = tarakanRepository.findById(userTarakanId).orElseThrow(NotFoundException::new);
         Random random = new Random();
@@ -146,7 +153,11 @@ public class TarakanService {
         ArrayList<Tarakan> tarakans = new ArrayList<>();
         for (int i=0; i<numOfTarakans; i++){
             Tarakan tarakan = new Tarakan();
-            tarakan.setStep(random.nextInt(tarakanUser.getLevel())+3);
+            if (tarakanUser.getLevel()>1){
+                tarakan.setStep(getRandomNumberInRange(tarakanUser.getLevel()+1,tarakanUser.getLevel()+2));
+            }else {
+                tarakan.setStep(random.nextInt(tarakanUser.getLevel()) + 3);
+            }
             tarStep = tarakan.getStep();
             tarakan.setTarname("Bot Level "+(tarStep-2));
             tarakan.setImgId("tarB"+i);
