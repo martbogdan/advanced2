@@ -11,17 +11,14 @@
     <link href="/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
     <style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
         #tarU {position: relative; cursor: pointer;}
-        #tarB {
-            position: relative;
-            cursor: pointer;
-        }
+        #tarB {position: relative; cursor: pointer;}
 
         #[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
 
     </style>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+<div class="navbar navbar-light navbar-fixed-top" style="background-color: #fccd92;" th:fragment="header">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -51,7 +48,7 @@
                     </a>
                 </li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
-                   <span th:text="${#httpServletRequest.remoteUser}"></span>
+                  <H4><span th:text="${#httpServletRequest.remoteUser}"></span></H4>
 
                 </li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
