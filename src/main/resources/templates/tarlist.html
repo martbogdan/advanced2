@@ -1,13 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-
-    <title>TaraCat</title>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-</head>
-<body style="padding:10px;">
+<head th:replace="base-layout :: head"></head>
+<body >
+<div th:replace="base-layout :: header"></div>
+<div class="container-fluid">
 <form th:action="@{/addtar}" th:object="${newTarakan}" method="post">
     <div class="form-group">
         <label>TarakanName</label>:
@@ -66,6 +62,7 @@
     </table>
 </div>
 </form>
+</div>
 </body>
 </html>
 

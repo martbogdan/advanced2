@@ -1,17 +1,13 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
-		#tarU {position: relative; cursor: pointer;}
+<head th:replace="base-layout :: head">
 
-		#[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
-
-	</style>
 <title>TaraCat</title>
 </head>
-<body style="padding:10px;">
-
-<div style="width:750px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
+<body >
+<div th:replace="base-layout :: header"></div>
+<div class="container-fluid">
+<div style="width:850px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
 	<input type="hidden" name="tarId" th:value="${tarId}">
 <!--	<input type="hidden" name="tarakanBot" th:value="${tarakanBot.tarname}">-->
 
@@ -77,7 +73,7 @@
 <!--	<input type="submit" value="Go!" id="tarGo" />-->
 </form>
 <form method="get" action="/back_to_list">
-	<input type="submit" value="choose other tarakan" />
+	<input type="submit" value="Back to my cockroaches" />
 </form>
 <div>
 <!--	<div>-->
@@ -95,5 +91,6 @@
 	<li><span th:text="${place.value}"></span> [<span th:text="${place.key}"></span>]</li>
 </div>
 </ol>
+</div>
 </body>
 </html>

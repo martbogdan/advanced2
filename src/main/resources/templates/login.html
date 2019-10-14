@@ -52,37 +52,7 @@
                 </div>
             </form>
             <h1>Registration</h1>
-            <form th:action="@{/registration}" method="post">
-
-                <div class="form-group">
-                    <label for="username">Username</label>:
-                    <input type="text"
-                           id="username"
-                           name="username"
-                           class="form-control"
-                           autofocus="autofocus"
-                           placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>:
-                    <input type="password"
-                           id="password"
-                           name="password"
-                           class="form-control"
-                           placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit"
-                                   name="register-submit"
-                                   id="register-submit"
-                                   class="form-control btn btn-info"
-                                   value="Register">
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <p>Click <a th:href="@{/registration}">here</a> to register and play.</p>
         </div>
     </div>
 

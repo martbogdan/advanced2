@@ -61,21 +61,24 @@ public class TarakanService {
     public Tarakan updateLevel (Tarakan tarakan, int experience){
         Tarakan tarakanDB = tarakanRepository.findById(tarakan.getId()).get();
         tarakanDB.setExperience(tarakan.getExperience()+experience);
-        if (tarakan.getExperience()>=100 && tarakan.getExperience()<=199 && tarakan.getLevel()==1){
-            tarakanDB.setLevel(tarakan.getLevel()+1);
-            tarakanDB.setStep(tarakan.getStep()+1);
+        if (tarakan.getExperience()>=0 && tarakan.getExperience()<=99){
+            tarakanDB.setLevel(1);
+            tarakanDB.setStep(3);
+        }else if (tarakan.getExperience()>=100 && tarakan.getExperience()<=199){
+            tarakanDB.setLevel(2);
+            tarakanDB.setStep(4);
         }else
-        if (tarakan.getExperience()>=200 && tarakan.getExperience()<=299 && tarakan.getLevel()==2){
-            tarakanDB.setLevel(tarakan.getLevel()+1);
-            tarakanDB.setStep(tarakan.getStep()+1);
+        if (tarakan.getExperience()>=200 && tarakan.getExperience()<=299){
+            tarakanDB.setLevel(3);
+            tarakanDB.setStep(5);
         }else
-        if (tarakan.getExperience()>=300 && tarakan.getExperience()<=399 && tarakan.getLevel()==3){
-            tarakanDB.setLevel(tarakan.getLevel()+1);
-            tarakanDB.setStep(tarakan.getStep()+1);
+        if (tarakan.getExperience()>=300 && tarakan.getExperience()<=399){
+            tarakanDB.setLevel(4);
+            tarakanDB.setStep(6);
         }else
-        if (tarakan.getExperience()>=400 && tarakan.getExperience()<=499 && tarakan.getLevel()==4){
-            tarakanDB.setLevel(tarakan.getLevel()+1);
-            tarakanDB.setStep(tarakan.getStep()+1);
+        if (tarakan.getExperience()>=400){
+            tarakanDB.setLevel(5);
+            tarakanDB.setStep(7);
         }else if (tarakan.getExperience()<0){
             tarakanDB.setExperience(0);
             tarakanDB.setLevel(1);
