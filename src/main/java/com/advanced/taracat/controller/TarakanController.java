@@ -22,9 +22,9 @@ import java.util.*;
 @Controller
 public class TarakanController {
 
-    public static final String TARAKANS_LIMIT_MESSAGE = "У вас вже існує 5 тараканів, видаліть одного або декілька та добавте нового";
-    public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Таракан з таким іменем вже існує";
-    public static final String TARAKAN_NAME_NOT_BLANK = "Імя таракана повинно містити мінімум 1 символ";
+    public static final String TARAKANS_LIMIT_MESSAGE = "You already have 5 cockroaches, delete one or more and then add new cockroach";
+    public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Cockroach with this name already exists";
+    public static final String TARAKAN_NAME_NOT_BLANK = "Cockroaches name must contain at least 1 character";
     @Autowired
     private TarakanRepository tarakanRepository;
     @Autowired
