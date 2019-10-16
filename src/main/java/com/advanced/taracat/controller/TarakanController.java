@@ -273,14 +273,14 @@ public class TarakanController {
         } else if (wayUser >= 100) {
             tarakanService.updateLevel(tarakanUser, (6 - tarakanUser.getLevel()));
             tarakanService.updateWin(tarakanUser);
-            message = "Ви отримуєте " + (6 - tarakanUser.getLevel()) + " досвіду, ваш досвід: " + tarakanUser.getExperience() + ", ваш Level: " + tarakanUser.getLevel();
+            message = "You get " + (6 - tarakanUser.getLevel()) + " coins, now you have: " + tarakanUser.getExperience() + " coins, your Level: " + tarakanUser.getLevel();
         } else if (wayUser < 100 && place <= 3) {
             tarakanService.updateLoss(tarakanUser);
-            message = "Ви зайняли " + place + "-е місце і отримуєте 0 досвіду, ваш досвід: " + tarakanUser.getExperience() + ", ваш Level: " + tarakanUser.getLevel();
+            message = "You came in " + place + "-th, so you get 0 coins, now you have: " + tarakanUser.getExperience() + " coins, your Level: " + tarakanUser.getLevel();
         } else if (wayUser < 100 && place > 3) {
             tarakanService.updateLoss(tarakanUser);
             tarakanService.updateLevel(tarakanUser, Math.negateExact(place));
-            message = "Ви зайняли " + place + "-е місце і втрачаєте " + (place) + " досвіду, ваш досвід: " + tarakanUser.getExperience() + ", ваш Level: " + tarakanUser.getLevel();
+            message = "You came in " + place + "-th, so you lose " + (place) + " coins, now you have: " + tarakanUser.getExperience() + " coins, your Level: " + tarakanUser.getLevel();
 
         }
         tarakanService.updateRuning(tarakanUser);
