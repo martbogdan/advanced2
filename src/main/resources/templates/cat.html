@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
 <title>TaraCat</title>
@@ -8,50 +8,41 @@
 
 <div style="padding:10px;float:left;">
 
-<form method="post" action="">
-
-	<div style="width:300px;padding:10px; border:1px solid #000;float:left;">
-		<div style="width:150px;float:left;">CatKolia [5] (100/100)</div>
-		<div style="width:125px;float:right;">
-			<div style="float:left;margin-left:3px;">Attack</div>
-			<div style="float:right;margin-right:10px;">Deff</div>
-			<div style="clear:both;"></div>
-		</div>
+	<div style="margin-bottom:10px;">UserName</div>
+	
+	<div style="width:1200px;float:left;">
+		<form method="post" action="/addcat">
+			<div style="width:250px;padding:10px;float:left;border:1px solid #000;">Create new Cat: <input type="text" name="catname" placeholder="Enter CatName" style="margin-right:10px;" />
+				<input type="submit" value="Create" /></div>
+		</form>
 		<div style="clear:both;"></div>
-		<div style="width:150px;height:245px;margin-top:25px;background-color:#ccc;float:left;">Cat Image (Avatar)</div>
-		<div style="width:125px;float:right;margin-top:25px">
-			<div style="float:left;">
-				<div style="width:50px;height:50px;background-color:#ccc">Head<input type="radio" name="x" /></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Nack<input type="radio" name="x"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Body<input type="radio" name="x"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Legs<input type="radio" name="x"></div>
+		<div style="margin-top:10px;color:darkred;" th:text="${cat_error}"></div>
+		<form method="post" action="catfight">
+			<div style="width:600px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+				List of Cats:
+				<div style="height:15px;"></div>
+				<div th:each="cat : ${cats}">
+					<span th:text="${cat.name}"></span>[<span th:text="${cat.cat_level}"></span>] (<span th:text="${cat.cat_expirience}"></span> / <span th:text="${cat.cat_maxexpirience}"></span>)
+                    ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catid" th:value="${cat.id}" /> )&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a th:href="@{/labirynth(catId=${cat.id})}">Р’ Р»Р°Р±С–СЂРёРЅС‚</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a th:href="@{/arena(catId=${cat.id})}">РќР° Р°СЂРµРЅСѓ</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span><a th:href="@{/delete_cat(catId=${cat.id})}">Р’РёРґР°Р»РёС‚Рё</a> </span>
+                    <div style="height:15px;"></div>
+				</div>
 			</div>
-			<div style="float:right;">
-				<div style="width:50px;height:50px;background-color:#ccc">Head<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Nack<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Body<input type="radio" name="y"></div>
-				<div style="width:50px;height:50px;background-color:#ccc;margin-top:15px;">Legs<input type="radio" name="y"></div>
+			<div style="float:left;margin:100px 0px 0px 50px;"><input type="submit" value="Р’ Р±С–Р№!"></div>
+			<div style="width:400px;margin-top:25px;padding:10px;float:right;border:1px solid #000;">
+				List of BotCats:
+				<div style="height:15px;"></div>
+				<div style="float:left;">BotCat1[1] ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catbot" value="1" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat2[2] ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catbot" value="2" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat3[3] ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catbot" value="3" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat4[4] ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catbot" value="4" /> )</div>
+				<div style="height:10px;clear:both;"></div>
+				<div style="float:left;">BotCat5[5] ( Р’РёР±СЂР°С‚Рё: <input type="radio" name="catbot" value="5" /> )</div>
+				<div style="height:10px;clear:both;"></div>
 			</div>
-			<div style="clear:both;"></div>
-		</div>
-		<div style="clear:both;"></div>
-	</div>
-	<div style="margin:150px 25px 0px 25px;float:left;">VS</div>
-	<div style="padding:10px; border:1px solid #000;float:left;">
-		<div style="width:150px;float:left;">CatSerhio [3] (25/100)</div>
-		<div style="clear:both;"></div>
-		<div style="width:150px;height:245px;margin-top:25px;background-color:#ccc;float:left;">Cat Image (Avatar)</div>
-		<div style="clear:both;"></div>
-	</div>
-	<div style="clear:both;height:25px;"></div>
-	<div style="text-align:center;margin-bottom:25px;"><input type="submit" value="Kick!" /></div>
-	<div style="padding:10px;width:545px;border:1px solid #000;">
-		<div style="padding:5px 0px">Round 2</div>
-		<div>Кіт CatKolia вдарив соперника в голову на -5 hp, заблокував шию </div>
-		<div>Кіт CatSerhio вдарив соперника в шию і попав в блок, пропустив удар в голову на -5 hp </div>
-		<div style="padding:5px 0px">Round 1</div>
-		<div>Кіт CatKolia вдарив соперника в голову на -3 hp, заблокував шию </div>
-		<div>Кіт CatSerhio вдарив соперника в шию і попав в блок, пропустив удар в голову на -3 hp </div>
+		</form>
 	</div>
 
 </form>

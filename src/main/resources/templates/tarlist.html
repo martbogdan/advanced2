@@ -1,24 +1,20 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-
-    <title>TaraCat</title>
-</head>
-<body style="padding:10px;">
-<a th:href="@{/tar}" title="" style="float:right;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Play Run Tarakan</a>
-
-<form th:action="@{/tarlist}" method="post">
-
+<head th:replace="base-layout :: head"></head>
+<body >
+<div th:replace="base-layout :: header"></div>
+<div class="container-fluid">
+<form th:action="@{/addtar}" th:object="${newTarakan}" method="post">
     <div class="form-group">
-        <label for="tarname">TarakanName</label>:
+        <label>TarakanName</label>:
         <input type="text"
                id="tarname"
                name="tarname"
+               th:field="*{tarname}"
                class="form-control"
                autofocus="autofocus"
                placeholder="TarakanName">
     </div>
-
     <div class="form-group">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -31,28 +27,48 @@
         </div>
     </div>
 </form>
-<h1>Tarakanu</h1>
-<form th:method="get" th:action="@{/list}">
-<table border="2" cellpadding="5">
-    <thead>
-    <th>Name</th>
-    <th>Level</th>
-    <th>Experience</th>
-    <th>Max Step</th>
-    <th>Delete</th>
-    </thead>
-    <tbody>
-    <tr th:each="tarakan : ${tarakans}">
-        <td th:text="${tarakan.tarname}"></td>
-        <td th:text="${tarakan.level}"></td>
-        <td th:text="${tarakan.experience}"></td>
-        <td th:text="${tarakan.step}"></td>
-        <td><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a> </td>
-    </tr>
-    </tbody>
-</table>
-<input th:if="${status} != 'all'" type="button" onclick="location.href='/list';" value="All Tarakans"/>
+<form th:method="get" th:action="@{tarlist}">
+ <div style="margin-top:10px;color:darkred;" th:text="${tar_error}"></div>
+<div class="container">
+<h3>Cockroaches</h3>
+    <table class="table" align="">
+        <thead>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Max Step</th>
+        <th>Coins</th>
+        <th>Running</th>
+        <th>Win</th>
+        <th>Loss</th>
+        <th>Draw</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="tarakan : ${tarakans}">
+            <td th:text="${tarakan.tarname}"></td>
+            <td th:text="${tarakan.level}"></td>
+            <td th:text="${tarakan.step}"></td>
+            <td th:text="${tarakan.experience}"></td>
+            <td th:text="${tarakan.running}"></td>
+            <td th:text="${tarakan.win}"></td>
+            <td th:text="${tarakan.loss}"></td>
+            <td th:text="${tarakan.draw}"></td>
+            <td><div><a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">Delete</a></div>
+                <div><a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">Play one road</a></div>
+                <div><a th:href="@{/choose_tarakan_six(tarId=${tarakan.id})}">Play multy road</a></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </form>
-
+</div>
 </body>
 </html>
+
+<!--    <div style="width:300px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">-->
+<!--        <div th:each="tarakan : ${tarakans}">-->
+<!--            <span th:text="${tarakan.tarname}"></span> [Level: <span th:text="${tarakan.level}"></span>] (Step: <span th:text="${tarakan.step}"></span>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/delete_tarakan(tarId=${tarakan.id})}">delete</a>&nbsp;&nbsp;&nbsp;<a th:href="@{/choose_tarakan(tarId=${tarakan.id})}">choose</a><a th:href="@{/choose_tarakan_six(tarId=${tarakan.id})}">choose6</a>-->
+<!--            <div style="height:15px;"></div>-->
+<!--        </div>-->
+<!--    </div>-->
