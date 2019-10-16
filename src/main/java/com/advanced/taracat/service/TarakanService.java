@@ -7,7 +7,10 @@ import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class TarakanService {
@@ -167,6 +170,14 @@ public class TarakanService {
             tarakans.add(tarakan);
         }
         return tarakans;
+    }
+    public List<Integer> numOfBotsByUserLevel(int tarUserLevel){
+        tarUserLevel=6-tarUserLevel;
+        ArrayList<Integer> roads = new ArrayList<>();
+        for (int i=(tarUserLevel*2); i>0; i--){
+            roads.add(11-i);
+        }
+        return roads;
     }
 
 }
