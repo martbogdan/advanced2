@@ -1,11 +1,14 @@
 package com.advanced.taracat.dao.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
+@NoArgsConstructor
 public class Tarakan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

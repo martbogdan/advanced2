@@ -8,7 +8,7 @@
 <div th:replace="base-layout :: header"></div>
 <div class="container-fluid">
 <div style="width:850px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
-	<input type="hidden" name="tarId" th:value="${tarId}">
+	<input type="hidden" name="tarId" th:value="${tarakan.id}">
 <!--	<input type="hidden" name="tarakanBot" th:value="${tarakanBot.tarname}">-->
 
 
@@ -31,7 +31,7 @@
 					}, 20);
 				}
 		</script>
-		<div><input type="hidden" th:value="${tarId}"><span th:text="${tarakanName}"></span></div>
+		<div><input type="hidden" th:value="${tarakan.id}"><span th:text="${tarakan.tarname}"></span></div>
 	</div>
 	<div th:each="tarakanBot : ${tarakanBots}" style="width:750px;height:100px;border:1px solid #ccc;margin-bottom:20px;">
 
@@ -58,19 +58,11 @@
 </div>
 
 <form method="get" action="/run_tarakan_six">
-	<input type="hidden" name="tarId" th:value="${tarId}">
+	<input type="hidden" name="tarId" th:value="${tarakan.id}">
 	<h4>Виберіть кількість ботів для забігу</h4>
-	<input type="submit" name="numOfTarakans" value="1"/>
-	<input type="submit" name="numOfTarakans" value="2"/>
-	<input type="submit" name="numOfTarakans" value="3"/>
-	<input type="submit" name="numOfTarakans" value="4"/>
-	<input type="submit" name="numOfTarakans" value="5"/>
-	<input type="submit" name="numOfTarakans" value="6"/>
-	<input type="submit" name="numOfTarakans" value="7"/>
-	<input type="submit" name="numOfTarakans" value="8"/>
-	<input type="submit" name="numOfTarakans" value="9"/>
-	<input type="submit" name="numOfTarakans" value="10"/>
-<!--	<input type="submit" value="Go!" id="tarGo" />-->
+	<span th:each="i : ${#numbers.sequence(tarakan.level * 2 - 1, 10)}">
+		<input type="submit" name="numOfTarakans" th:value="${i}"/>
+	</span>
 </form>
 <form method="get" action="/back_to_list">
 	<input type="submit" value="Back to my cockroaches" />

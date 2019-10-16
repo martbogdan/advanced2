@@ -106,7 +106,7 @@ public class TarakanController {
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
         model.addAttribute("tarakanUser", tarakanUser);
-        model.addAttribute("tarId", tarakanUser.getId());
+        model.addAttribute("tarakan", tarakanUser);
 
         return "tar_six";
     }
@@ -186,9 +186,8 @@ public class TarakanController {
         for (int i = 0; i < numOfTarakans; i++) {
             tarakanBots.get(i).setTarname(uniqNames.get(i) + " " + tarakanBots.get(i).getTarname());
         }
-        String tarName = tarakanUser.getTarname();
 
-        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakan", tarakanUser);
         model.addAttribute("tarakanBots", tarakanBots);
 
         Random random = new Random();
@@ -287,7 +286,6 @@ public class TarakanController {
         tarakanService.updateRuning(tarakanUser);
         model.addAttribute("message", message);
         model.addAttribute("winner", winnerList.get(0));
-        model.addAttribute("tarId", tarakanUser.getId());
 
         return "tar_six";
     }
