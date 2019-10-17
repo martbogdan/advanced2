@@ -174,9 +174,6 @@ public class TarakanController {
         Tarakan tarakanUser = tarakanService.getTarakanById(tarId);
         ArrayList<Tarakan> tarakanBots = (ArrayList<Tarakan>) tarakanService.generateTarakanBotsByUserLevel(tarId, numOfTarakans);
 
-        ArrayList<Integer> numOfBotsByUserLevel = (ArrayList<Integer>) tarakanService.numOfBotsByUserLevel(tarakanUser.getLevel());
-        model.addAttribute("numOfBotsByUserLevel",numOfBotsByUserLevel);
-
         String[] names = {"Oggi", "Jeck", "Joi", "Di-di", "Marki", "Iggo", "Lyolik", "Josh", "Do-do", "Dodik"};
         Random rnd = new Random();
         List<String> freeNames = null;

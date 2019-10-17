@@ -9,22 +9,21 @@
 <div class="container-fluid">
 <div style="width:850px;padding:50px 50px; border:1px solid #000;margin-bottom:25px;">
 	<input type="hidden" name="tarId" th:value="${tarakan.id}">
-<!--	<input type="hidden" name="tarakanBot" th:value="${tarakanBot.tarname}">-->
 
 
 	<div style="width:750px;height:100px; border:1px solid #ccc;margin-bottom:20px;">
 
 		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
 		<script th:inline="javascript">
-				tarU.onload= function() {
-					let start = Date.now();
-					let way = [[${wayUser}]];
-					let k = 2000/(way*7);
+			tarU.onload= function() {
+				let start = Date.now();
+				let way = [[${wayUser}]];
+				let k = 2000/(way*7);
 
-					let timer = setInterval(function() {
-						let timePassed = Date.now() - start;
+				let timer = setInterval(function() {
+					let timePassed = Date.now() - start;
 
-						tarU.style.left = timePassed/k + 'px';
+					tarU.style.left = timePassed/k + 'px';
 
 						if (timePassed > 2000) clearInterval(timer);
 
@@ -59,7 +58,7 @@
 
 <form method="get" action="/run_tarakan_six">
 	<input type="hidden" name="tarId" th:value="${tarakan.id}">
-	<h4>Виберіть кількість ботів для забігу</h4>
+	<h4>Choose number of bots to run</h4>
 	<span th:each="i : ${#numbers.sequence(tarakan.level * 2 - 1, 10)}">
 		<input type="submit" name="numOfTarakans" th:value="${i}"/>
 	</span>
@@ -68,10 +67,6 @@
 	<input type="submit" value="Back to my cockroaches" />
 </form>
 <div>
-<!--	<div>-->
-<!--		<span th:text="${wayUser}"></span>-->
-<!--		<span th:text="${wayBots}"></span>-->
-<!--	</div>-->
 	<span th:text="${message}"></span>
 	<h3>Winner: <span th:text="${winner}"></span></h3>
 	<script>
