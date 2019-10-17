@@ -4,12 +4,12 @@
 
 <title>TaraCat</title>
 </head>
-<body style="padding:10px;">
+<body >
 <div th:replace="base-layout :: header"></div>
 
 <div style="padding:10px;float:left;">
 
-	<div style="margin-bottom:10px;">UserName</div>
+	<div style="margin-bottom:10px;">UserName: <span th:text="${#httpServletRequest.remoteUser}"/></div>
 	
 	<div style="width:1200px;float:left;">
 		<form method="post" action="/addcat">
