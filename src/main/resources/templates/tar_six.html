@@ -58,7 +58,7 @@
 
 <form method="get" action="/run_tarakan_six">
 	<input type="hidden" name="tarId" th:value="${tarakan.id}">
-	<h4>Виберіть кількість ботів для забігу</h4>
+	<h4>Choose number of bots to run</h4>
 	<span th:each="i : ${#numbers.sequence(tarakan.level * 2 - 1, 10)}">
 		<input type="submit" name="numOfTarakans" th:value="${i}"/>
 	</span>

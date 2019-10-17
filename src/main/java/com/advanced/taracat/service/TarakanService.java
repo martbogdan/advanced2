@@ -51,6 +51,7 @@ public class TarakanService {
         tarakan.setWin(0);
         tarakan.setDraw(0);
         tarakan.setRunning(0);
+        tarakan.setImgId("tarU");
         return tarakanRepository.save(tarakan);
     }
 
