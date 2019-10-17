@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
     <style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
-        #[[${tarakan.imgId}]] {position: relative;cursor: pointer;}
+        #tarU {position: relative; cursor: pointer;}
         #[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
     </style>
 </head>
