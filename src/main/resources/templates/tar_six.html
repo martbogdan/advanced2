@@ -13,9 +13,9 @@
 
 	<div style="width:750px;height:100px; border:1px solid #ccc;margin-bottom:20px;">
 
-		<img id="tarU" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
+		<img id="${tarakan.imgId}" th:id="${tarakan.imgId}" src="../static/images/tarU.png" width="60" th:src="@{images/tarU.png}">
 		<script th:inline="javascript">
-				tarU.onload= function() {
+				[(${tarakan.imgId})].onload= function() {
 					let start = Date.now();
 					let way = [[${wayUser}]];
 					let k = 2000/(way*7);
@@ -23,7 +23,7 @@
 					let timer = setInterval(function() {
 						let timePassed = Date.now() - start;
 
-						tarU.style.left = timePassed/k + 'px';
+						[(${tarakan.imgId})].style.left = timePassed/k + 'px';
 
 						if (timePassed > 2000) clearInterval(timer);
 
