@@ -25,6 +25,7 @@ public class TarakanController {
     public static final String TARAKANS_LIMIT_MESSAGE = "You already have 5 cockroaches, delete one or more and then add new cockroach";
     public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Cockroach with this name already exists";
     public static final String TARAKAN_NAME_NOT_BLANK = "Cockroaches name must contain at least 1 character";
+    public static final String TARAKAN_lENGTH = "Cockroaches name should be less then 20 characters";
     @Autowired
     private TarakanRepository tarakanRepository;
     @Autowired
@@ -60,6 +61,10 @@ public class TarakanController {
         }
         if (newTarakan.getTarname().trim().isEmpty()){
             model.addFlashAttribute("tar_error",TARAKAN_NAME_NOT_BLANK);
+            error = true;
+        }
+        if (newTarakan.getTarname().length()>21){
+            model.addFlashAttribute("tar_error",TARAKAN_lENGTH);
             error = true;
         }
 
