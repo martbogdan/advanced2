@@ -9,9 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
-    <style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
-        #tarU {position: relative; cursor: pointer;}
-        #[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
+    <style th:inline="css" th:each="tarakanImage : ${tarakanImages}">
+        /*#tarU {position: relative; cursor: pointer;}*/
+        #[[${tarakanImage}]] {position: relative;cursor: pointer;}
     </style>
 </head>
 <body>

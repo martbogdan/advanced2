@@ -184,8 +184,15 @@ public class TarakanController {
             tarakanBots.get(i).setTarname(uniqNames.get(i) + " " + tarakanBots.get(i).getTarname());
         }
 
+        List<String> tarakanImages = new ArrayList<>();
+        for (int i=0; i<numOfTarakans; i++){
+            tarakanImages.add(tarakanBots.get(i).getImgId());
+        }
+        tarakanImages.add(tarakanUser.getImgId());
+
         model.addAttribute("tarakan", tarakanUser);
         model.addAttribute("tarakanBots", tarakanBots);
+        model.addAttribute("tarakanImages",tarakanImages);
 
         Random random = new Random();
         int wayUser = 0;
