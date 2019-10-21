@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-public class GameController {
+public class CatController {
 
     @Autowired
     private CatRepository catRepository;
@@ -29,7 +29,7 @@ public class GameController {
     @Autowired
     private UserService userService;
 
-    //Метод для отримування списку котів юзера
+    // Отримання списку котів
     @GetMapping("/cat")
     public String catList(Model model){
         String catError = "";
@@ -38,39 +38,21 @@ public class GameController {
         model.addAttribute("cat_error", catError);
         return "cat";
     }
-//          Метод додавання кота
+
+    // Дбавлення кота
     @PostMapping("/addcat")
     public String addCat (@RequestParam String catname, Model model){
-        Cat cat = new Cat();
-        Cat catDB = new Cat();
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         String userName = authentication.getName();
-        User currentUser = userService.getUserByUsername(userName);
+        String catError = "";
 
-        String catError;
-
-        List<Cat> catCount = catRepository.findAllByUser_Username(currentUser.getUsername());
-        int catCountSize = catCount.size();
-        if (catCountSize >= 5) {
-            catError = "У вас вже існує 5 котів, видаліть одного або декілька та добавте нового";
-        } else {
-            catDB = catRepository.findCatByName(catname);
-
-            if (catDB != null) {
-                catError = "Кіт з таким іменем вже існує";
-            } else {
-                cat.setUser(currentUser);
-                cat.setName(catname);
-                cat.setCat_level(1);
-                cat.setCat_expirience(0);
-                cat.setCat_maxexpirience(1000);
-                catRepository.save(cat);
-                catError = "";
-            }
-        }
+        catService.addCat(catname, userName);
 
         model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
         model.addAttribute("cat_error", catError);
+
         return "cat";
     }
 
