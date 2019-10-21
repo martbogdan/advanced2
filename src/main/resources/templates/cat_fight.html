@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head  th:replace="base-layout :: head">
 
 <title>TaraCat</title>
 </head>
-<body style="padding:10px;">
-
+<body >
+<div th:replace="base-layout :: header"></div>
 <div style="padding:10px;float:left;">
 
 <form method="post" action="catfightkick">

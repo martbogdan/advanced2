@@ -22,9 +22,10 @@ import java.util.*;
 @Controller
 public class TarakanController {
 
-    public static final String TARAKANS_LIMIT_MESSAGE = "У вас вже існує 5 тараканів, видаліть одного або декілька та добавте нового";
-    public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Таракан з таким іменем вже існує";
-
+    public static final String TARAKANS_LIMIT_MESSAGE = "You already have 5 cockroaches, delete one or more and then add new cockroach";
+    public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Cockroach with this name already exists";
+    public static final String TARAKAN_NAME_NOT_BLANK = "Cockroaches name must contain at least 1 character";
+    public static final String TARAKAN_lENGTH = "Cockroaches name should be less then 20 characters";
     @Autowired
     private TarakanRepository tarakanRepository;
     @Autowired
@@ -56,6 +57,14 @@ public class TarakanController {
         Tarakan tarakanDB = tarakanService.getTarakanByName(newTarakan.getTarname());
         if (tarakanDB != null) {
             model.addFlashAttribute("tar_error", TARAKAN_NAME_EXISTS_MESSAGE);
+            error = true;
+        }
+        if (newTarakan.getTarname().trim().isEmpty()){
+            model.addFlashAttribute("tar_error",TARAKAN_NAME_NOT_BLANK);
+            error = true;
+        }
+        if (newTarakan.getTarname().length()>21){
+            model.addFlashAttribute("tar_error",TARAKAN_lENGTH);
             error = true;
         }
 
@@ -102,7 +111,7 @@ public class TarakanController {
         String tarName = tarakanUser.getTarname();
         model.addAttribute("tarakanName", tarName);
         model.addAttribute("tarakanUser", tarakanUser);
-        model.addAttribute("tarId", tarakanUser.getId());
+        model.addAttribute("tarakan", tarakanUser);
 
         return "tar_six";
     }
@@ -179,9 +188,8 @@ public class TarakanController {
         for (int i = 0; i < numOfTarakans; i++) {
             tarakanBots.get(i).setTarname(uniqNames.get(i) + " " + tarakanBots.get(i).getTarname());
         }
-        String tarName = tarakanUser.getTarname();
 
-        model.addAttribute("tarakanName", tarName);
+        model.addAttribute("tarakan", tarakanUser);
         model.addAttribute("tarakanBots", tarakanBots);
 
         Random random = new Random();
@@ -214,8 +222,8 @@ public class TarakanController {
             }
         }
         /**
-        * rouding max way of tarakan
-        * */
+         * rouding max way of tarakan
+         * */
         if (wayUser > 100) {
             wayUser = 100;
         }
@@ -232,8 +240,8 @@ public class TarakanController {
         model.addAttribute("wayUser", wayUser);
         model.addAttribute("wayBots", wayBots);
         /**
-        * Sorting tarakans
-        * **/
+         * Sorting tarakans
+         * **/
         HashMap<String, Integer> map = new HashMap<>();
         map.put(tarakanUser.getTarname(), wayUser);
         for (int i = 0; i < numOfTarakans; i++) {
@@ -280,7 +288,6 @@ public class TarakanController {
         tarakanService.updateRuning(tarakanUser);
         model.addAttribute("message", message);
         model.addAttribute("winner", winnerList.get(0));
-        model.addAttribute("tarId", tarakanUser.getId());
 
         return "tar_six";
     }

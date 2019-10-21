@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
     <meta charset="UTF-8">
@@ -11,10 +11,7 @@
     <link href="/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}"/>
     <style th:inline="css" th:each="tarakanBot : ${tarakanBots}">
         #tarU {position: relative; cursor: pointer;}
-        #tarB {position: relative; cursor: pointer;}
-
         #[[${tarakanBot.imgId}]] {position: relative;cursor: pointer;}
-
     </style>
 </head>
 <body>
@@ -26,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">My Game</a>
+            <a class="navbar-brand" th:href="@{/}">Home</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -61,7 +58,7 @@
     </div>
 </div>
 
-<div th:fragment="footer">
+<div th:align="center" th:fragment="footer">
     <p><p>&copy; 2019 TaraCat
 </div>
 </body>

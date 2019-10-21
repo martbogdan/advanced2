@@ -4,9 +4,10 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
@@ -15,7 +16,7 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>Registration page</h1>
             <form th:action="@{/registration}" method="post">
-
+                <span th:text="${message}"></span>
                 <div class="form-group">
                     <label for="username">Username</label>:
                     <input type="text"
@@ -47,27 +48,8 @@
             </form>
         </div>
     </div>
-
-    <p><a href="/" th:href="@{/login}">Back to login page</a></p>
-
+    <div th:align="center"><h3><a href="/" th:href="@{/login}">Back to login page</a></h3></div>
 </div>
+<nav th:replace="base-layout :: footer"></nav>
 </body>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
-<!--<head>-->
-<!--    <title>Registration</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:if="${param.error}">-->
-<!--    Invalid username and password.-->
-<!--</div>-->
-
-<!--<form th:action="@{/registration}" method="post">-->
-<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
-<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
-<!--    <div><input type="submit" value="Sign Up"/></div>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->

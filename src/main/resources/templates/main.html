@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Game Zone</title>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head th:replace="base-layout :: head">
+<title>Game</title>
 </head>
 <body>
-<h1>Welcome to Game Zone!</h1>
+<nav th:replace="base-layout :: header"></nav>
+    <div class="container" align="center">
+        <div >
+              <h1>Welcome to Game Zone!</h1>
+              <img src="../static/images/logimg.jpg" th:src="@{images/logimg.jpg}" alt="Oops! The image was here... " width="100%"/>
 
-<p>Click <a th:href="@{/hello}">here</a> to login and play.</p>
-<p>OR</p>
-<p>Click <a th:href="@{/registration}">here</a> to register and play.</p>
+        </div>
+
+</div>
+
+<nav th:replace="base-layout :: footer"></nav>
 </body>
 </html>
+
+
+

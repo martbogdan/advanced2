@@ -3,19 +3,15 @@
 <head th:replace="base-layout :: head"></head>
 <body>
 <div th:replace="base-layout :: header"></div>
-<div class="container">
-<!--<form th:action="@{/logout}" method="post">-->
-<!--	<input type="submit" value="Sign Out"/>-->
-<!--</form>-->
+<div class="container" align="center">
+
 <p th:text="'Hello, '+ ${#httpServletRequest.remoteUser} + '!'" />
 
-<!--kjhkjgkjhgk-->
-<!--<div sec:authrntication="principal.authrities"></div>-->
-<!--<div th:text="${#authentication}"></div>-->
 <div style="width:650px;">
 	<a th:href="@{/cat}" title="" style="float:left;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Cat Fight <img src="../static/images/cat1.gif" width="280" th:src="@{images/cat1.gif}"></a>
 	<a th:href="@{/tarlist}" title="" style="float:right;width:300px;height:300px;text-align:center;border:1px solid #ccc;">Run Tarakan <img src="../static/images/tarU.gif" width="280" th:src="@{images/tarU.gif}"></a>
 </div>
 </div>
+<nav th:replace="base-layout :: footer"></nav>
 </body>
 </html>
