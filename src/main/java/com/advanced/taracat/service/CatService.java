@@ -51,29 +51,13 @@ public class CatService {
         User currentUser = userService.getUserByUsername(userName);
 
         Cat cat = new Cat();
-        Cat catDB;
 
-        String catError;
-
-        List<Cat> catCount = catRepository.findAllByUser_Username(currentUser.getUsername());
-        int catCountSize = catCount.size();
-        if (catCountSize >= 5) {
-            catError = "У вас вже існує 5 котів, видаліть одного або декілька котів та добавте нового";
-        } else {
-            catDB = catRepository.findCatByName(catName);
-
-            if (catDB != null) {
-                catError = "Кіт з таким іменем вже існує";
-            } else {
-                cat.setUser(currentUser);
-                cat.setName(catName);
-                cat.setCat_level(1);
-                cat.setCat_expirience(0);
-                cat.setCat_maxexpirience(1000);
-                catRepository.save(cat);
-                catError = "";
-            }
-        }
+        cat.setUser(currentUser);
+        cat.setName(catName);
+        cat.setCat_level(1);
+        cat.setCat_expirience(0);
+        cat.setCat_maxexpirience(1000);
+        catRepository.save(cat);
 
     }
 

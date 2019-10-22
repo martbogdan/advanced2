@@ -46,9 +46,26 @@ public class CatController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String userName = authentication.getName();
-        String catError = "";
+        User currentUser = userService.getUserByUsername(userName);
 
-        catService.addCat(catname, userName);
+        Cat catDB;
+
+        String catError;
+
+        List<Cat> catCount = catRepository.findAllByUser_Username(currentUser.getUsername());
+        int catCountSize = catCount.size();
+        if (catCountSize >= 5) {
+            catError = "У вас вже існує 5 котів, видаліть одного або декілька котів та добавте нового";
+        } else {
+            catDB = catRepository.findCatByName(catname);
+
+            if (catDB != null) {
+                catError = "Кіт з таким іменем вже існує";
+            } else {
+                catService.addCat(catname, userName);
+                catError = "";
+            }
+        }
 
         model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
         model.addAttribute("cat_error", catError);
