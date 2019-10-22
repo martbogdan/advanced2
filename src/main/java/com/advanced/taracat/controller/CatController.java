@@ -1,6 +1,7 @@
 package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.Cat;
+import com.advanced.taracat.dao.entity.CatBot;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
@@ -80,17 +81,16 @@ public class CatController {
     public String catFight (@RequestParam Long catid, @RequestParam int catbot, Model model){
 
         Cat cat;
+        CatBot catBot = new CatBot();
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName();
-
-        cat = catRepository.findCatById(catid);
+        cat = catService.getCatById(catid);
 
         int cat_Hp = cat.getCat_level() * 10;
         int catLast_Hp = cat.getCat_level() * 10;
-        int catBot_Hp = catbot * 10;
-        int catBotLast_Hp = catbot * 10;
 
+        int catBotLast_Hp = catbot;
+
+        catService.catBotGeneration(catbot, catBotLast_Hp, catBot);
 
         model.addAttribute("catid", cat.getId());
         model.addAttribute("catname", cat.getName());
@@ -98,10 +98,10 @@ public class CatController {
         model.addAttribute("cathpstart", cat_Hp);
         model.addAttribute("cathpfinish", catLast_Hp);
 
-        model.addAttribute("catbotname", "Кіт Бот "+catbot+"-ого рівня");
-        model.addAttribute("catbot", catbot);
-        model.addAttribute("catbothpstart", catBot_Hp);
-        model.addAttribute("catbothpfinish", catBotLast_Hp);
+        model.addAttribute("catbotname", catBot.getName());
+        model.addAttribute("catbot", catBot.getLevel());
+        model.addAttribute("catbothpstart", catBot.getHp());
+        model.addAttribute("catbothpfinish", catBot.getLastHp());
 
         return "cat_fight";
     }

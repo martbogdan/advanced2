@@ -1,6 +1,7 @@
 package com.advanced.taracat.service;
 
 import com.advanced.taracat.dao.entity.Cat;
+import com.advanced.taracat.dao.entity.CatBot;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
@@ -26,12 +27,27 @@ public class CatService {
         return catRepository.findAllByUser_Username(userName);
     }
 
-    // Замінити по принципу getAllByUsername
+    // Знайти кота за іменем
     public Cat getCatByName (String catName){
         return catRepository.findCatByName(catName);
     }
 
-    //-------------------------------------------------------------------------------------------------------------------------------------------------
+    // Знайти всіх котів за Id
+    public Cat getCatById (Long id){
+        return catRepository.findCatById(id);
+    }
+
+    // Генерація бота для битви
+    public CatBot catBotGeneration (int catBotLevel, int catBotLast_Hp, CatBot catBot){
+
+        catBot.setName("Кіт "+catBotLevel+" рівня");
+        catBot.setLevel(catBotLevel);
+        catBot.setHp(catBot.getLevel()*10);
+        catBot.setLastHp(catBotLast_Hp*10);
+
+        return catBot;
+
+    }
 
     public void addCat (String catName, String userName){
 
