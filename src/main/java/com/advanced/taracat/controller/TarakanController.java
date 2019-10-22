@@ -2,8 +2,6 @@ package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.Tarakan;
 import com.advanced.taracat.dao.entity.User;
-import com.advanced.taracat.dao.repository.TarakanRepository;
-import com.advanced.taracat.exeptions.NotFoundException;
 import com.advanced.taracat.service.TarakanService;
 import com.advanced.taracat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,7 @@ public class TarakanController {
     public static final String TARAKAN_NAME_EXISTS_MESSAGE = "Cockroach with this name already exists";
     public static final String TARAKAN_NAME_NOT_BLANK = "Cockroaches name must contain at least 1 character";
     public static final String TARAKAN_lENGTH = "Cockroaches name should be less then 20 characters";
-    @Autowired
-    private TarakanRepository tarakanRepository;
+
     @Autowired
     private TarakanService tarakanService;
     @Autowired
@@ -36,7 +33,7 @@ public class TarakanController {
     @GetMapping("/tarlist")
     public String listTarakan(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("tarakans", tarakanRepository.findAllByUser_Username(authentication.getName()));
+        model.addAttribute("tarakans", tarakanService.getAllByUsername(authentication.getName()));
         model.addAttribute("newTarakan", new Tarakan());
         return "tarlist";
     }
@@ -77,9 +74,9 @@ public class TarakanController {
 
     @GetMapping("/delete_tarakan")
     public String deleteTarakan(@RequestParam Long tarId) {
-        Tarakan deletedTarakan = tarakanRepository.findById(tarId).orElseThrow(NotFoundException::new);
+        Tarakan deletedTarakan = tarakanService.getTarakanById(tarId);
         if (deletedTarakan != null) {
-            tarakanRepository.delete(deletedTarakan);
+            tarakanService.delete(deletedTarakan.getId());
         }
         return "forward:/tarlist";
     }
