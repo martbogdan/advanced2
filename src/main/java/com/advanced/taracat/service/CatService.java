@@ -5,6 +5,8 @@ import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,33 +18,18 @@ public class CatService {
     @Autowired
     private CatRepository catRepository;
     @Autowired
-    private CatService catService;
-    @Autowired
     private UserService userService;
 
-    // Якась хуйня
-    public List<Cat> getAll(){
-        return catRepository.findAll();
+    // Витяг всіх котів юзера
+    public List<Cat> getAllByUsername(String userName){
+
+        return catRepository.findAllByUser_Username(userName);
     }
 
-    // Якась хуйня
-    public List<Cat> getAllByUsername (String username){
-        return catRepository.findAllByUser_Username(username);
+    // Замінити по принципу getAllByUsername
+    public Cat getCatByName (String catName){
+        return catRepository.findCatByName(catName);
     }
-
-    // Якась хуйня
-    public Cat getCatById (Long id){
-        return catRepository.findById(id).orElseThrow(NotFoundException::new);
-    }
-
-    // Якась хуйня
-    public Cat getCatByName (String name){
-        return catRepository.findCatByName(name);
-    }
-
-    public Cat create (Cat tarakan){
-        return catRepository.save(tarakan);
-    } // Хз шо, треба перепровірити і видалити
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------
 

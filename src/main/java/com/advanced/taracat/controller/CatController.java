@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -32,32 +31,35 @@ public class CatController {
     // Отримання списку котів
     @GetMapping("/cat")
     public String catList(Model model){
-        String catError = "";
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
+
+        String catError = "";
+
+        model.addAttribute("cats", catService.getAllByUsername(authentication.getName()));
         model.addAttribute("cat_error", catError);
         return "cat";
     }
 
-    // Дбавлення кота
+    // Добавлення кота
     @PostMapping("/addcat")
     public String addCat (@RequestParam String catname, Model model){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String userName = authentication.getName();
-        User currentUser = userService.getUserByUsername(userName);
 
         Cat catDB;
 
         String catError;
 
-        List<Cat> catCount = catRepository.findAllByUser_Username(currentUser.getUsername());
+        List<Cat> catCount = catService.getAllByUsername(authentication.getName());
         int catCountSize = catCount.size();
         if (catCountSize >= 5) {
             catError = "У вас вже існує 5 котів, видаліть одного або декілька котів та добавте нового";
         } else {
-            catDB = catRepository.findCatByName(catname);
+
+            catDB = catService.getCatByName(catname);
 
             if (catDB != null) {
                 catError = "Кіт з таким іменем вже існує";
@@ -67,7 +69,7 @@ public class CatController {
             }
         }
 
-        model.addAttribute("cats", catRepository.findAllByUser_Username(authentication.getName()));
+        model.addAttribute("cats", catService.getAllByUsername(authentication.getName()));
         model.addAttribute("cat_error", catError);
 
         return "cat";
@@ -76,11 +78,11 @@ public class CatController {
 
     @PostMapping("catfight")
     public String catFight (@RequestParam Long catid, @RequestParam int catbot, Model model){
-        Cat cat = new Cat();
+
+        Cat cat;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        User currentUser = userService.getUserByUsername(userName);
 
         cat = catRepository.findCatById(catid);
 
