@@ -7,23 +7,50 @@
 <body>
 <div th:replace="base-layout :: header"></div>
     <div class="container">
-        <h3>List of All Tarakans</h3>
         <table class="table" align="">
             <thead>
-            <th>Name</th>
-            <th>Level</th>
-            <th>Coins</th>
-            <th>User</th>
+                <th><h3>Best of All Tarakans</h3></th>
+                <th><h3>Best of All Cats</h3></th>
             </thead>
             <tbody>
-            <tr th:each="allTarakan : ${allTarakanList}">
-                <td th:text="${allTarakan.tarname}"></td>
-                <td th:text="${allTarakan.level}"></td>
-                <td th:text="${allTarakan.experience}"></td>
-                <td th:text="${allTarakan.user.username}"></td>
-            </tr>
+                <td>
+                    <table class="table" align="">
+                    <thead>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Coins</th>
+                    <th>User</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="allTarakan : ${allTarakanList}">
+                        <td th:text="${allTarakan.tarname}"></td>
+                        <td th:text="${allTarakan.level}"></td>
+                        <td th:text="${allTarakan.experience}"></td>
+                        <td th:text="${allTarakan.user.username}"></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table" align="">
+                        <thead>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>User</th>
+                        </thead>
+                        <tbody>
+                        <tr th:each="allCat : ${allCatsList}">
+                            <td th:text="${allCat.name}"></td>
+                            <td th:text="${allCat.cat_level}"></td>
+                            <td th:text="${allCat.user.username}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tbody>
         </table>
+
+
     </div>
 
 <nav th:replace="base-layout :: footer"></nav>

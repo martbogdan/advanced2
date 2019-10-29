@@ -1,6 +1,8 @@
 package com.advanced.taracat.controller;
 
+import com.advanced.taracat.comparing.CatComparator;
 import com.advanced.taracat.comparing.TarakanComparator;
+import com.advanced.taracat.dao.entity.Cat;
 import com.advanced.taracat.dao.entity.Tarakan;
 import com.advanced.taracat.service.CatService;
 import com.advanced.taracat.service.TarakanService;
@@ -27,6 +29,10 @@ public class StatisticsController {
         List<Tarakan> allTarakanList = tarakanService.getAll();
         Collections.sort(allTarakanList, new TarakanComparator());
         model.addAttribute("allTarakanList",allTarakanList);
+
+        List<Cat> allCatsList = catService.getAll();
+        Collections.sort(allCatsList, new CatComparator());
+        model.addAttribute("allCatsList", allCatsList);
         return "statistic";
     }
 }

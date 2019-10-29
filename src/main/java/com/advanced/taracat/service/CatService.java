@@ -4,10 +4,7 @@ import com.advanced.taracat.dao.entity.Cat;
 import com.advanced.taracat.dao.entity.CatBot;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.CatRepository;
-import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +17,10 @@ public class CatService {
     private CatRepository catRepository;
     @Autowired
     private UserService userService;
+
+    public List<Cat> getAll () {
+        return catRepository.findAll();
+    }
 
     // Витяг всіх котів юзера
     public List<Cat> getAllByUsername(String userName){
