@@ -9,7 +9,7 @@
     <div class="container">
         <table class="table" align="">
             <thead>
-                <th><h3>Best of All Tarakans</h3></th>
+                <th><h3>Top 10 Tarakans</h3></th>
                 <th><h3>Best of All Cats</h3></th>
             </thead>
             <tbody>
@@ -22,11 +22,11 @@
                     <th>User</th>
                     </thead>
                     <tbody>
-                    <tr th:each="allTarakan : ${allTarakanList}">
-                        <td th:text="${allTarakan.tarname}"></td>
-                        <td th:text="${allTarakan.level}"></td>
-                        <td th:text="${allTarakan.experience}"></td>
-                        <td th:text="${allTarakan.user.username}"></td>
+                    <tr th:each="tarakan : ${tarakans}">
+                        <td th:text="${tarakan.tarname}"></td>
+                        <td th:text="${tarakan.level}"></td>
+                        <td th:text="${tarakan.experience}"></td>
+                        <td th:text="${tarakan.user.username}"></td>
                     </tr>
                     </tbody>
                     </table>
@@ -52,7 +52,9 @@
 
 
     </div>
-
+<div>
+    <input type="submit" th:action="@{/list_of_all}" onclick="location.href='/list_of_all';" value="All List">
+</div>
 <nav th:replace="base-layout :: footer"></nav>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +29,28 @@ public class StatisticsController {
     public String listOfAll (Model model){
         List<Tarakan> allTarakanList = tarakanService.getAll();
         Collections.sort(allTarakanList, new TarakanComparator());
-        model.addAttribute("allTarakanList",allTarakanList);
+        model.addAttribute("tarakans",allTarakanList);
+
+        List<Cat> allCatsList = catService.getAll();
+        Collections.sort(allCatsList, new CatComparator());
+        model.addAttribute("allCatsList", allCatsList);
+        return "statistic";
+    }
+
+    @GetMapping("/list_of_first_10")
+    public String listOfFirst10 (Model model){
+        List<Tarakan> allTarakanList = tarakanService.getAll();
+        Collections.sort(allTarakanList, new TarakanComparator());
+        ArrayList<Tarakan> firstTenTarakans= new ArrayList<>();
+        if (allTarakanList.size()<=10){
+            firstTenTarakans= (ArrayList<Tarakan>) allTarakanList;
+        } else {
+            for (int i=0; i<10; i++){
+                firstTenTarakans.add(i,allTarakanList.get(i));
+            }
+        }
+
+        model.addAttribute("tarakans",firstTenTarakans);
 
         List<Cat> allCatsList = catService.getAll();
         Collections.sort(allCatsList, new CatComparator());
