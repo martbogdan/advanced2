@@ -31,5 +31,10 @@ public class MainUiController {
         return "userpage";
     }
 
+    @GetMapping("/hero")
+    public String disPage (){
+        return "hero";
+    }
+
 
 }

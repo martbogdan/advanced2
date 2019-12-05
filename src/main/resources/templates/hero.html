@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head  th:replace="base-layout :: head">
+
+    <title>TaraCat</title>
+</head>
+<body >
+<div th:replace="base-layout :: header"></div>
+
+<div style="padding:10px;float:left;">
+
+    <div style="width:1200px;float:left;">
+
+        <form method="post" action="/addhero">
+            <div style="width:250px;padding:10px;float:left;border:1px solid #000;">Створити нового героя:<br>
+                <input type="text" name="heroname" placeholder="Введіть ім'я героя" style="margin-right:10px;" />
+                <div style="height:15px;"></div>
+                <select name="herorace">
+                    <option value="0">Виберіть расу героя</option>
+                    <option value="1">Люди</option>
+                    <option value="2">Нечисть</option>
+                    <option value="3">Гноми</option>
+                    <option value="4">Дияволи</option>
+                    <option value="5">Ельфи</option>
+                </select>
+                <div style="height:15px;"></div>
+                <select name="heroclass">
+                    <option value="0">Виберіть клас героя</option>
+                    <option value="1">Воїн</option>
+                    <option value="2">Маг</option>
+                    <option value="3">Рейнджер</option>
+                </select>
+                <div style="height:15px;"></div>
+                <input type="submit" value="Створити" /></div>
+        </form>
+        <div style="clear:both;"></div>
+        <div style="margin-top:10px;color:darkred;" th:text="${hero_error}"></div>
+            <div style="width:600px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
+                Список героїв:
+                <div style="height:15px;"></div>
+                <div th:each="hero : ${heroes}">
+                    <span th:text="${hero.name}"></span>[<span th:text="${hero.race}"></span>]&nbsp;&nbsp;|&nbsp;&nbsp;[<span th:text="${hero.heroClass}"></span>]&nbsp;&nbsp;|&nbsp;&nbsp;[<span th:text="${hero.level}"></span>]&nbsp;&nbsp;|&nbsp;&nbsp;<span><a th:href="@{/choose_hero(heroId=${hero.id})}">Вибрати</a> </span>&nbsp;&nbsp;|&nbsp;&nbsp;<span><a th:href="@{/hero_settings(heroId=${hero.id})}">Налаштування</a> </span>
+                    <div style="height:15px;"></div>
+                </div>
+            </div>
+    </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

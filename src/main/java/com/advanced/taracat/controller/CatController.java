@@ -109,14 +109,11 @@ public class CatController {
     @PostMapping("catfightkick")
     public String catFight (@RequestParam Long catid, @RequestParam int catattack, @RequestParam int catdeff, @RequestParam Long catbot, @RequestParam int catbotid, @RequestParam int cathpfinish, @RequestParam int catbothpfinish, Model model){
 
-        Cat cat = new Cat();
+        Cat cat;
+        CatBot catBot;
         Random random = new Random();
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName();
-        User currentUser = userService.getUserByUsername(userName);
-
-        cat = catRepository.findCatById(catid);
+        cat = catService.getCatById(catid);
 
         int catbotattack = random.nextInt(3)+1;
         int catbotdeff = random.nextInt(3)+1;
@@ -124,8 +121,8 @@ public class CatController {
         int catStright = random.nextInt(cat.getCat_level())+1;
         int catBotStright = random.nextInt(catbotid)+1;
 
-        String catMessageFormation = "";
-        String catMessageFormation2 = "";
+        String catMessageFormation;
+        String catMessageFormation2;
 
         if (catattack == catbotdeff) {
             catMessageFormation = cat.getName() + " попав в блок";
@@ -215,5 +212,3 @@ public class CatController {
     }
 
 }
-/*
-Попередній коміт*/
