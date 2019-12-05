@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head  th:replace="base-layout :: head">
 
     <title>TaraCat</title>
@@ -8,12 +8,11 @@
 <div th:replace="base-layout :: header"></div>
 
 <div style="padding:10px;float:left;">
-
     <div style="width:1200px;float:left;">
-
-        <form method="post" action="/addhero">
+        <form th:method="post" th:action="@{/addhero}" th:object="${newHero}">
             <div style="width:250px;padding:10px;float:left;border:1px solid #000;">Створити нового героя:<br>
-                <input type="text" name="heroname" placeholder="Введіть ім'я героя" style="margin-right:10px;" />
+                <div style="margin-top:10px;color:darkred;" th:text="${hero_error}"></div>
+                <input type="text" name="name"  placeholder="Введіть ім'я героя" style="margin-right:10px;" />
                 <div style="height:15px;"></div>
                 <select name="herorace">
                     <option value="0">Виберіть расу героя</option>
@@ -34,7 +33,6 @@
                 <input type="submit" value="Створити" /></div>
         </form>
         <div style="clear:both;"></div>
-        <div style="margin-top:10px;color:darkred;" th:text="${hero_error}"></div>
             <div style="width:600px;margin-top:25px;padding:10px;float:left;border:1px solid #000;">
                 Список героїв:
                 <div style="height:15px;"></div>
@@ -44,10 +42,7 @@
                 </div>
             </div>
     </div>
-
     </form>
-
 </div>
-
 </body>
 </html>
