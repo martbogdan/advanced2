@@ -47,7 +47,7 @@ public class DisController {
         Hero heroDB;
         String heroError = "";
         boolean error = false;
-        List<Hero> heroCount = disService.getAllByUsername(authentication.getName());
+        List<Hero> heroCount = disService.getAllActiveByUsername(authentication.getName());
         int heroCountSize = heroCount.size();
         if (heroCountSize >= 15) {
             heroError = "У вас вже існує 15 героїв";
