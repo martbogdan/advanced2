@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base-layout :: head">
+
+    <title>TaraCat</title>
+</head>
+<body>
+<div th:replace="base-layout :: header"></div>
+<div class="container">
+    <div th:object="${hero}">
+        <div>
+            <li><span>Імя: </span><span th:text="${hero.name}"> Імя</span></li>
+            <li><span>Раса: </span><span th:text="${hero.race}"> Імя</span></li>
+            <li><span>Клас: </span><span th:text="${hero.heroClass}"> Імя</span></li>
+        </div>
+        <div>
+            <form action="/delete_hero_forever" th:action="@{/delete_hero_forever(heroId=${hero.id})}" method="get">
+                <input type="hidden" name="heroId" th:value="${hero.id}">
+                <input type="submit" name="heroId" id="heroId" value="Видалити Назавжди">
+            </form>
+            <form action="/delete_hero" th:action="@{/delete_hero(heroId=${hero.id})}" method="get">
+                <input type="hidden" name="heroId" th:value="${hero.id}">
+                <input type="submit" name="heroId" id="Id" value="Видалити Безпечно">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

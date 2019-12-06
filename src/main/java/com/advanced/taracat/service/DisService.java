@@ -3,10 +3,13 @@ package com.advanced.taracat.service;
 import com.advanced.taracat.dao.entity.Hero;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.DisRepository;
+import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DisService {
@@ -18,16 +21,33 @@ public class DisService {
 
 
     // Витяг всіх героїв юзера
-    public List<Hero> getAllByUsername(String userName){
+    public List<Hero> getAllByUsername(String userName) {
         return disRepository.findAllByUser_Username(userName);
     }
 
+    // Витяг всіх активних героїв юзера
+    public List<Hero> getAllActiveByUsername(String userName) {
+        List<Hero> heroes = disRepository.findAllByUser_Username(userName);
+        List<Hero> heroesActive = new ArrayList<>();
+        for (Hero hero : heroes) {
+            if (hero.isActive()) {
+                heroesActive.add(hero);
+            }
+        }
+        return heroesActive;
+    }
+
+    // Знайти героя за id
+    public Hero getHeroById(Long id) {
+        return disRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
     // Знайти героя за іменем
-    public Hero getHeroByName (String heroName){
+    public Hero getHeroByName(String heroName) {
         return disRepository.findHeroByName(heroName);
     }
 
-    public void addHero (String heroName, String userName, int herorace, int heroclass){
+    public void addHero(String heroName, String userName, int herorace, int heroclass) {
 
         /* Справочник
 
@@ -50,6 +70,7 @@ public class DisService {
         hero.setName(heroName);
         hero.setHeroClass(heroclass);
         hero.setRace(herorace);
+        hero.setActive(true);
         hero.setLevel(1);
         hero.setLidership(3);
         hero.setExpirience(0);
@@ -107,6 +128,21 @@ public class DisService {
 
         disRepository.save(hero);
 
+    }
+
+    public void delete(Long id) {
+        Optional<Hero> heroToDelete = disRepository.findById(id);
+        if (heroToDelete.isPresent()) {
+            disRepository.delete(heroToDelete.get());
+        }
+    }
+
+    public Hero deleteMark(Long id) {
+        Hero heroToMark = disRepository.findById(id).orElseThrow(NotFoundException::new);
+        if (heroToMark.isActive() == true) {
+            heroToMark.setActive(false);
+        }
+        return disRepository.save(heroToMark);
     }
 
 /*    // Знайти всіх котів за Id

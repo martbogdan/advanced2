@@ -32,7 +32,7 @@ public class DisController {
     @GetMapping("/heroList")
     public String listOfHero(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("heroes", disService.getAllByUsername(authentication.getName()));
+        model.addAttribute("heroes", disService.getAllActiveByUsername(authentication.getName()));
         model.addAttribute("newHero", new Hero());
         return "hero";
     }
@@ -66,7 +66,7 @@ public class DisController {
             heroError = "Герой з таким іменем вже існує";
             error = true;
         }
-        if (!error){
+        if (!error) {
             disService.addHero(newHero.getName(), userName, newHero.getRace(), newHero.getHeroClass());
             heroError = "";
         }
@@ -85,6 +85,32 @@ public class DisController {
         //model.addAttribute("cats", catService.getAllByUsername(authentication.getName()));
         //model.addAttribute("cat_error", catError);
         return "zone";
+    }
+
+    @GetMapping("/hero_settings")
+    public String heroSettings(@RequestParam(value = "heroId") Long heroId, Model model) {
+        model.addAttribute("hero", disService.getHeroById(heroId));
+        return "hero_settings";
+    }
+
+    @GetMapping("/delete_hero_forever")
+    public String deleteHero(@RequestParam Long heroId) {
+        Hero hero = disService.getHeroById(heroId);
+        if (hero != null) {
+            log.info("Hero: " + hero.getName() + " deleted forever");
+            disService.delete(hero.getId());
+        }
+        return "redirect:/heroList";
+    }
+
+    @GetMapping("delete_hero")
+    public String deleteHeroMark(@RequestParam Long heroId) {
+        Hero hero = disService.getHeroById(heroId);
+        if (hero != null) {
+            disService.deleteMark(hero.getId());
+            log.info("Hero: " + hero.getName() + " was marked (deleted)");
+        }
+        return "redirect:/heroList";
     }
 
 

@@ -32,6 +32,7 @@ public class Hero {
     private int attackType;
     private int initiative;
     private int numberOfGoals;
+    private boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
