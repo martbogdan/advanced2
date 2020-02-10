@@ -14,4 +14,4 @@ Application will run by default on port 8080
 
 Configure the port by changing server.port in application.properties
 
-Link on swagger https://taracat.herokuapp.com
+Link https://taracat.herokuapp.com
