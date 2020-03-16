@@ -82,6 +82,10 @@ public class DisService {
         hero.setImmunitySlot(0);
         hero.setAttackType(0);
         hero.setDurability(0);
+        hero.setZoneX(1);
+        hero.setZoneY(1);
+        hero.setZoneInsideX(1);
+        hero.setZoneInsideX(1);
 
         if (heroclass == 1) { // Воїн
             heroSteps = 20;
@@ -143,6 +147,31 @@ public class DisService {
             heroToMark.setActive(false);
         }
         return disRepository.save(heroToMark);
+    }
+
+    public int findZone(int zoneId) {
+
+        if (zoneId == 1) {
+            zoneId = 0;
+        } else {
+            zoneId = (zoneId-1)*50;
+        }
+
+        return zoneId;
+
+    }
+
+    public void updateZone( Long heroId, int zoneX, int zoneY) {
+
+        Hero hero = getHeroById(heroId);
+
+        if (hero != null) {
+            hero.setZoneX(zoneX);
+            hero.setZoneY(zoneY);
+        }
+
+        disRepository.save(hero);
+
     }
 
 /*    // Знайти всіх котів за Id

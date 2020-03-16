@@ -82,8 +82,68 @@ public class DisController {
 
         String heroError = "";
 
-        //model.addAttribute("cats", catService.getAllByUsername(authentication.getName()));
-        //model.addAttribute("cat_error", catError);
+        int userZoneX = 1;
+        int userZoneY = 1;
+
+        Hero hero = disService.getHeroById(heroId);
+        if (hero != null) {
+            userZoneX = hero.getZoneX();
+            userZoneY = hero.getZoneY();
+        }
+
+        model.addAttribute("userZoneX", disService.findZone(userZoneX));
+        model.addAttribute("userZoneY", disService.findZone(userZoneY));
+        model.addAttribute("heroId", heroId);
+        model.addAttribute("heroError", heroError);
+
+        return "zone";
+    }
+
+    @GetMapping("/zone")
+    public String heroZone(@RequestParam Long heroId, int zoneX, int zoneY, Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String heroError = "";
+
+        int testZoneX = 0;
+        int testZoneY = 0;
+
+        Hero heroCheck = disService.getHeroById(heroId);
+
+        if (heroCheck.getZoneX() > zoneX) {
+            testZoneX = heroCheck.getZoneX()-zoneX;
+        } else {
+            testZoneX = zoneX-heroCheck.getZoneX();
+        }
+
+        if (heroCheck.getZoneY() > zoneY) {
+            testZoneY = heroCheck.getZoneY()-zoneY;
+        } else {
+            testZoneY = zoneY-heroCheck.getZoneY();
+        }
+
+        if (testZoneY > 1 || testZoneX > 1) {
+
+            heroError = "Ви намагаєтесь переміститись більше ніж на 1 клітинку";
+
+            model.addAttribute("userZoneX", disService.findZone(heroCheck.getZoneX()));
+            model.addAttribute("userZoneY", disService.findZone(heroCheck.getZoneY()));
+
+        } else {
+
+            disService.updateZone(heroId, zoneX, zoneY);
+
+            Hero hero = disService.getHeroById(heroId);
+
+            model.addAttribute("userZoneX", disService.findZone(hero.getZoneX()));
+            model.addAttribute("userZoneY", disService.findZone(hero.getZoneY()));
+
+        }
+
+        model.addAttribute("heroId", heroId);
+        model.addAttribute("heroError", heroError);
+
         return "zone";
     }
 

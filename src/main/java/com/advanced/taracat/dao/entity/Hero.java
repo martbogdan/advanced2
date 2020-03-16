@@ -33,6 +33,10 @@ public class Hero {
     private int initiative;
     private int numberOfGoals;
     private boolean active;
+    private int zoneX;
+    private int zoneY;
+    private int zoneInsideX;
+    private int zoneInsideY;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id", nullable = false)
