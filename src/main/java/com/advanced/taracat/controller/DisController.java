@@ -1,6 +1,7 @@
 package com.advanced.taracat.controller;
 
 import com.advanced.taracat.dao.entity.Hero;
+import com.advanced.taracat.dao.entity.Location;
 import com.advanced.taracat.dao.repository.DisRepository;
 import com.advanced.taracat.service.DisService;
 import com.advanced.taracat.service.UserService;
@@ -79,6 +80,8 @@ public class DisController {
     public String heroZone(@RequestParam Long heroId, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        /*List<Location> locations = disService.getAllLocations();*/
 
         String heroError = "";
 

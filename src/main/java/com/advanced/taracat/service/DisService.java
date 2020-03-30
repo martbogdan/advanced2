@@ -1,6 +1,7 @@
 package com.advanced.taracat.service;
 
 import com.advanced.taracat.dao.entity.Hero;
+import com.advanced.taracat.dao.entity.Location;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.DisRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
@@ -173,6 +174,10 @@ public class DisService {
         disRepository.save(hero);
 
     }
+
+    /*public List<Location> getAllLocations () {
+        return disRepository.findAll();
+    }*/
 
 /*    // Знайти всіх котів за Id
     public Cat getCatById (Long id){
