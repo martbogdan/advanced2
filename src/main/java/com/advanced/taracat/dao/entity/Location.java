@@ -20,9 +20,4 @@ public class Location {
     private String locationImg; // Картинка локації
     private int locationOnOff;
 
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
 }

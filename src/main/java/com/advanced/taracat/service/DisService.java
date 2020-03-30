@@ -4,6 +4,7 @@ import com.advanced.taracat.dao.entity.Hero;
 import com.advanced.taracat.dao.entity.Location;
 import com.advanced.taracat.dao.entity.User;
 import com.advanced.taracat.dao.repository.DisRepository;
+import com.advanced.taracat.dao.repository.LocationRepository;
 import com.advanced.taracat.exeptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class DisService {
 
     @Autowired
     private DisRepository disRepository;
+    @Autowired
+    private LocationRepository locationRepository;
     @Autowired
     private UserService userService;
 
@@ -175,9 +178,38 @@ public class DisService {
 
     }
 
-    /*public List<Location> getAllLocations () {
-        return disRepository.findAll();
-    }*/
+    public List<Location> getAllLocations () {
+        return locationRepository.findAllByLocationOnOff(1);
+    }
+
+    public String checkLocationInZone(int x, int y) {
+
+        List<Location> locations = getAllLocations();
+
+        Location checkLocation;
+        String locationInfo = "В данній зоні немає жодної локації";
+
+        if (locations != null && locations.size() > 0) {
+
+            System.out.println(x + " AND " + y);
+
+            for (int i=0;i<locations.size();i++) {
+
+                checkLocation = locations.get(i);
+
+                if (checkLocation.getZoneIdX() == x && checkLocation.getZoneIdY() == y) {
+
+                    locationInfo = checkLocation.getName();
+
+                }
+
+            }
+
+        }
+
+        return locationInfo;
+
+    }
 
 /*    // Знайти всіх котів за Id
     public Cat getCatById (Long id){

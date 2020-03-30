@@ -81,9 +81,8 @@ public class DisController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        /*List<Location> locations = disService.getAllLocations();*/
-
         String heroError = "";
+        String locationInfo;
 
         int userZoneX = 1;
         int userZoneY = 1;
@@ -94,10 +93,13 @@ public class DisController {
             userZoneY = hero.getZoneY();
         }
 
+        locationInfo = disService.checkLocationInZone(hero.getZoneX(), hero.getZoneY());
+
         model.addAttribute("userZoneX", disService.findZone(userZoneX));
         model.addAttribute("userZoneY", disService.findZone(userZoneY));
         model.addAttribute("heroId", heroId);
         model.addAttribute("heroError", heroError);
+        model.addAttribute("locationInfo", locationInfo);
 
         return "zone";
     }
@@ -108,6 +110,7 @@ public class DisController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String heroError = "";
+        String locationInfo;
 
         int testZoneX = 0;
         int testZoneY = 0;
@@ -125,6 +128,8 @@ public class DisController {
         } else {
             testZoneY = zoneY-heroCheck.getZoneY();
         }
+
+        locationInfo = disService.checkLocationInZone(zoneX, zoneY);
 
         if (testZoneY > 1 || testZoneX > 1) {
 
@@ -146,6 +151,7 @@ public class DisController {
 
         model.addAttribute("heroId", heroId);
         model.addAttribute("heroError", heroError);
+        model.addAttribute("locationInfo", locationInfo);
 
         return "zone";
     }
