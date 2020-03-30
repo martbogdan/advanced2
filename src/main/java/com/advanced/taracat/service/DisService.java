@@ -191,8 +191,6 @@ public class DisService {
 
         if (locations != null && locations.size() > 0) {
 
-            System.out.println(x + " AND " + y);
-
             for (int i=0;i<locations.size();i++) {
 
                 checkLocation = locations.get(i);
