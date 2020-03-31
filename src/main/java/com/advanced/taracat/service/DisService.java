@@ -209,6 +209,18 @@ public class DisService {
 
     }
 
+    public String checkLocationLink(Long heroId, String a) {
+
+        String locationLink = "";
+
+        if (!a.equals("В данній зоні немає жодної локації")) {
+            locationLink = "<a href=\"/location?heroId="+heroId+"6\">Зайти в локацію</a>";
+        }
+
+        return locationLink;
+
+    }
+
 /*    // Знайти всіх котів за Id
     public Cat getCatById (Long id){
         return catRepository.findCatById(id);

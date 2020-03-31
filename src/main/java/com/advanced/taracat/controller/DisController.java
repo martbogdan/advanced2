@@ -83,6 +83,7 @@ public class DisController {
 
         String heroError = "";
         String locationInfo;
+        String locationLink;
 
         int userZoneX = 1;
         int userZoneY = 1;
@@ -94,12 +95,14 @@ public class DisController {
         }
 
         locationInfo = disService.checkLocationInZone(hero.getZoneX(), hero.getZoneY());
+        locationLink = disService.checkLocationLink(heroId, locationInfo);
 
         model.addAttribute("userZoneX", disService.findZone(userZoneX));
         model.addAttribute("userZoneY", disService.findZone(userZoneY));
         model.addAttribute("heroId", heroId);
         model.addAttribute("heroError", heroError);
         model.addAttribute("locationInfo", locationInfo);
+        model.addAttribute("locationLink", locationLink);
 
         return "zone";
     }
@@ -111,6 +114,7 @@ public class DisController {
 
         String heroError = "";
         String locationInfo;
+        String locationLink;
 
         int testZoneX = 0;
         int testZoneY = 0;
@@ -130,6 +134,7 @@ public class DisController {
         }
 
         locationInfo = disService.checkLocationInZone(zoneX, zoneY);
+        locationLink = disService.checkLocationLink(heroId, locationInfo);
 
         if (testZoneY > 1 || testZoneX > 1) {
 
@@ -152,6 +157,7 @@ public class DisController {
         model.addAttribute("heroId", heroId);
         model.addAttribute("heroError", heroError);
         model.addAttribute("locationInfo", locationInfo);
+        model.addAttribute("locationLink", locationLink);
 
         return "zone";
     }

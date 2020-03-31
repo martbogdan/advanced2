@@ -6,7 +6,11 @@
 
 <div class="dis_error" th:text="${heroError}"></div>
 
-<div style="margin:10px;border:1px solid black;width:300px;padding:10px;" th:text="${locationInfo}"></div>
+<div style="margin:10px;border:1px solid black;width:300px;padding:10px;">
+    <div th:text="${locationInfo}"></div>
+    [(${locationLink})]
+</div>
+
 
 <div class="zone_all">
 
