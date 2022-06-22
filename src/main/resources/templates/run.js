@@ -18,4 +18,5 @@ var timer = setInterval(function() {
 // left изменяет значение от 0px до 400px
 function draw(timePassed) {
    tarU.style.left = timePassed / 5 + 'px';
+   tarB.style.left = timePassed / 5 + 'px';
 }
